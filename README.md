@@ -1,25 +1,27 @@
 # F1R3FLY Brand Portal
 
-**Every F1R3FLY logo, color, and font — in one place.**
+**Every F1R3FLY logo, color, and font, in one place.**
 
-*Last update: October 9, 2026*
+*Last update: October 19, 2026*
 
-[**→ Open the visual brand portal**](https://f1r3fly-io.github.io/f1r3fly-brand-portal/)
+[**→ Open the visual brand portal**](https://hannahadamsdesign-spec.github.io/f1r3fly-brand-portal/)
 
 Three brands live here, and they use different logos:
 
-- **F1R3FLY Industries** — the parent brand. Trefoil **knot**.
-- **F1R3FLY.IO** — the developer platform. Firefly **bug**.
-- **f1r3lang** — the language (formerly Rholang). **f1r3lang** wordmark.
+- **F1R3FLY Industries**: the parent brand. Trefoil **knot**.
+- **F1R3FLY.IO**: the developer platform. Firefly **bug**.
+- **f1r3lang**: the language (formerly Rholang). **f1r3lang** wordmark.
 
-If you just want a file fast, use the [visual portal](https://f1r3fly-io.github.io/f1r3fly-brand-portal/). To browse the folders directly, start below.
+If you just want a file fast, use the [visual portal](https://hannahadamsdesign-spec.github.io/f1r3fly-brand-portal/). To browse the folders directly, start below.
+
+Source repo: [hannahadamsdesign-spec/f1r3fly-brand-portal](https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal). The portal and all downloads are served from here. An org fork also exists at [github.com/F1R3FLY-io/f1r3fly-brand-portal](https://github.com/F1R3FLY-io/f1r3fly-brand-portal); it is a fork and may lag behind this repo.
 
 ## Brand books
 
-The deep reference for each brand — logo construction, clearspace, architecture, grid, color, type, and voice.
+The deep reference for each brand: logo construction, clearspace, architecture, grid, color, type, and voice.
 
-- **[F1R3FLY Industries — Brand Style Guide (PDF)](F1R3FLY%20INDUSTRIES-Brand%20Style%20Guide.pdf)** · the trefoil-knot master brand
-- **[F1R3FLY.IO — Brand Guidebook (PDF)](F1R3FLY.IO-Brand%20Guidebook.pdf)** · the firefly-bug developer platform
+- **[F1R3FLY Industries Brand Style Guide (PDF)](F1R3FLY%20INDUSTRIES-Brand%20Style%20Guide.pdf)** · the trefoil-knot master brand
+- **[F1R3FLY.IO Brand Guidebook (PDF)](F1R3FLY.IO-Brand%20Guidebook.pdf)** · the firefly-bug developer platform
 
 ## Logos
 
@@ -29,27 +31,32 @@ The deep reference for each brand — logo construction, clearspace, architectur
 | **[F1R3FLY.IO bug icon →](F1R3FLY-IO-Brand-Assets)** | bug, circle icon | for avatars, favicons, app icons |
 | **[F1R3FLY Industries logo →](F1R3FLY-Industries-Brand-Assets)** | horizontal, vertical, circle | `color-on-dark`, `color-on-light`, `bw-on-light`, `white` |
 | **[F1R3FLY Industries knot icon →](F1R3FLY-Industries-Brand-Assets)** | knot, circle icon | for avatars, favicons, app icons |
-| **[f1r3lang logo →](F1r3lang-Brand-Assets)** | wordmark | `color-on-dark`, `color-on-light`, `white`, `black` — transparent, plus `-solid` versions on black or white |
+| **[f1r3lang logo →](F1r3lang-Brand-Assets)** | wordmark | `color-on-dark`, `color-on-light`, `white`, `black` (transparent), plus `-solid` versions on black or white |
 
-Formats: SVG · PNG · PDF. The icon alone is a badge — use the full logo on covers and public pieces.
+Formats: SVG · PNG · PDF. The icon alone is a badge; use the full logo on covers and public pieces.
 
 ## Color & type
 
 - **Colors:** Black `#000000`, White `#FFFFFF`, Brand Yellow `#F3D630`, Brand Sky `#3FA9F5`. Signature gradient runs yellow → sky.
   - [Color system PDF](F1R3FLY-Industries-Brand-Assets/f1r3fly-brand-color-system-06.12.2026.pdf)
-  - [Swatch pack (.zip)](swatches/f1r3fly-brand-swatches.zip) — drops the palette into Illustrator, Photoshop, and Canva
-- **Fonts:** [League Spartan + Source Sans 3](f1r3fly-brand-fonts) (free, SIL OFL). League Spartan (Light, Regular, SemiBold, Bold) for headings/UI, Source Sans 3 for body. League Spartan replaced Josefin Sans on 2026-09-20. Never typeset Brandon Grotesque — it lives only inside the logo files.
+  - [Swatch pack (.zip)](swatches/f1r3fly-brand-swatches.zip): drops the palette into Illustrator, Photoshop, and Canva
+- **Fonts:** [League Spartan + Source Sans 3](f1r3fly-brand-fonts) (free, SIL OFL; license texts are in the folder). League Spartan (Light, Regular, SemiBold, Bold) for headings and UI, Source Sans 3 for body. Josefin Sans is retired. Never typeset Brandon Grotesque; it lives only inside the logo files.
 
 ## Templates & grid
 
-- **[Layout grid (.zip)](templates/f1r3fly-brand-grid.zip)** — the 6-column grid behind every F1R3FLY layout (same one in the brand books). Also [SVG](templates/f1r3fly-brand-grid.svg) · [PDF](templates/f1r3fly-brand-grid.pdf).
-- **[Social templates →](templates/social-media-templates/linkedin-post)** — square 1080 LinkedIn posts (announcements, quotes, stats, taglines), PNG plus editable SVG/PDF source.
+- **[Layout grid (.zip)](templates/f1r3fly-brand-grid.zip)**: the 6-column grid behind every F1R3FLY layout (same one in the brand books). Also [SVG](templates/f1r3fly-brand-grid.svg) · [PDF](templates/f1r3fly-brand-grid.pdf).
+- **[Social templates →](templates/social-media-templates/linkedin-post)**: square 1080 LinkedIn posts (announcements, quotes, stats, taglines), PNG plus editable SVG/PDF source.
+
+## Social media
+
+- **[F1R3FLY.IO profile pictures →](F1R3FLY-IO-Brand-Assets/social-media)**: the bug and wordmark in a ring for YouTube, X, and Bluesky; the bug on black for LinkedIn. 2000 × 2000, SVG · PNG · PDF.
+- **[Animated Canva templates →](templates/canva-animated)**: ten animated post templates (01 logo intro, 02 to 05 gradient backgrounds, 06 to 10 panel loops). The portal links each to a Canva template link, which gives you your own editable copy in a free Canva account. MP4 previews are in the folder.
 
 ## AI brand kit
 
 **[Download the skill](f1r3fly-brand-kit/f1r3fly-brand-kit.skill)** · **[Read the spec](f1r3fly-brand-kit/SKILL.md)**
 
-A machine-readable brand spec for Claude, ChatGPT, and other AI tools — exact colors, type, logo rules, and voice, so anything they generate comes out on-brand the first time.
+A machine-readable brand spec for Claude, ChatGPT, and other AI tools: exact colors, type, logo rules, and voice, so anything they generate comes out on-brand the first time.
 
 ## Which file do I use?
 
@@ -62,9 +69,9 @@ Find what you're doing on the left. Grab the file on the right.
 | You're printing in just black and white | `bw-on-light` (knot) or `BW-white-background` (bug) | PDF or SVG |
 | It goes on a photo or a bright color | the `white` logo | SVG (or PNG) |
 | You need a tiny icon, like a profile picture | the knot (Industries) or the bug (.IO) | SVG or PNG |
-| You're not sure which brand | Knot = Industries. Bug = F1R3FLY.IO. | — |
+| You're not sure which brand | Knot = Industries. Bug = F1R3FLY.IO. | n/a |
 
-**New to the file types?** SVG stays sharp at any size — use it when you can. PNG is a picture with a see-through background. PDF is best for printing or just looking.
+**New to the file types?** SVG stays sharp at any size; use it when you can. PNG is a picture with a see-through background. PDF is best for printing or just looking.
 
 ## What's in this repo
 
@@ -73,7 +80,7 @@ f1r3fly-brand-portal/
 ├── F1R3FLY-Industries-Brand-Assets/   knot logos + color system + swatches
 ├── F1R3FLY-IO-Brand-Assets/           bug logos (+ social-media/)
 ├── F1r3lang-Brand-Assets/             f1r3lang wordmark (color / white / black)
-├── f1r3fly-brand-fonts/               League Spartan + Source Sans 3
+├── f1r3fly-brand-fonts/               League Spartan + Source Sans 3 (+ OFL license texts)
 ├── templates/                         layout grid + social templates
 ├── swatches/                          Illustrator / Photoshop / Canva swatch pack
 ├── f1r3fly-brand-kit/                 AI brand kit (skill + spec)

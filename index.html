@@ -108,6 +108,23 @@
   .swrow { display: flex; gap: 0; width: 100%; height: 188px; }
   .swrow span { flex: 1; }
 
+  /* ---------- SOCIAL MEDIA: avatars + animated Canva templates ---------- */
+  .card .well.thumbs { gap: 10px; padding: 18px; flex-wrap: wrap; }
+  .card .well.thumbs video, .card .well.thumbs img.thumb { border-radius: 6px; background: #000; display: block; object-fit: cover; }
+  .card .well.thumbs.one video { width: auto; max-height: 230px; max-width: 100%; }
+  .card .well.thumbs.two video { width: calc(50% - 5px); }
+  .card .well.thumbs.four video, .card .well.thumbs.five video { width: calc(25% - 8px); }
+  .card .well.thumbs.five video { width: calc(33.333% - 7px); }
+  .card .well img.avatar { width: 40%; max-width: 150px; border-radius: 50%; }
+  .card .well img.avatar.sq { border-radius: 10px; }
+  .dl-row { font-size: 0.92rem; color: var(--text-dim); line-height: 1.8; }
+  .dl-row b { color: var(--white); font-weight: 700; }
+  .dl-row a { color: var(--sky); font-weight: 600; }
+  .dl-row a:hover { text-decoration: underline; }
+  .section-note { margin-top: 18px; font-size: 0.97rem; color: var(--text-dim); max-width: 60em; line-height: 1.7; }
+  .section-note b { color: var(--white); }
+  .section-note a { color: var(--sky); font-weight: 600; }
+
   /* ---------- BRAND KIT + QUICK GUIDE (side by side) ---------- */
   .help-grid { display: grid; grid-template-columns: minmax(300px, 360px) 1fr; gap: 20px; align-items: start; }
   .cheat-panel { background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 16px; padding: 26px 28px 28px; }
@@ -138,7 +155,7 @@
     <div class="eyebrow">Brand assets &amp; guidelines</div>
     <div class="hero-row">
       <h1>F1R3FLY Brand Portal</h1>
-      <div class="last-update">Last update: September 23, 2026</div>
+      <div class="last-update">Last update: October 19, 2026</div>
     </div>
   </div>
 </header>
@@ -165,7 +182,7 @@
         <div class="body">
           <h3>F1R3FLY Industries</h3>
           <div class="meta">Brand Style Guide · September 2026</div>
-          <div class="desc">The master-brand rulebook for the trefoil knot. Logo construction and clearspace, brand architecture, the layout grid, color, typography, and voice &mdash; everything that defines the parent brand.</div>
+          <div class="desc">The master-brand rulebook for the trefoil knot. Logo construction and clearspace, brand architecture, the layout grid, color, typography, and voice: everything that defines the parent brand.</div>
           <div class="btn-row">
             <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY%20INDUSTRIES-Brand%20Style%20Guide.pdf">Download PDF</a>
           </div>
@@ -177,7 +194,7 @@
         <div class="body">
           <h3>F1R3FLY.IO</h3>
           <div class="meta">Brand Guidebook · September 2026</div>
-          <div class="desc">The developer-platform rulebook for the firefly bug. The same depth as the Industries guide &mdash; logo usage, clearspace, grid, color, type, and voice &mdash; tuned for F1R3FLY.IO.</div>
+          <div class="desc">The developer-platform rulebook for the firefly bug. The same depth as the Industries guide (logo usage, clearspace, grid, color, type, and voice), tuned for F1R3FLY.IO.</div>
           <div class="btn-row">
             <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY.IO-Brand%20Guidebook.pdf">Download PDF</a>
           </div>
@@ -189,7 +206,7 @@
         <div class="body">
           <h3>f1r3lang</h3>
           <div class="meta">Brand Assets &middot; September 2026</div>
-          <div class="desc">The language brand, formerly Rholang. The f1r3lang wordmark in color (for dark and light backgrounds), white, and black &mdash; transparent or on a solid background. Each variant zips together its SVG &middot; PNG &middot; PDF.</div>
+          <div class="desc">The language brand, formerly Rholang. The f1r3lang wordmark in color (for dark and light backgrounds), white, and black, transparent or on a solid background. Each variant zips together its SVG &middot; PNG &middot; PDF.</div>
           <div class="btn-row">
             <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1r3lang-Brand-Assets/f1r3lang-logo-color-on-dark.zip">Download logo</a>
             <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1r3lang-Brand-Assets">Browse all f1r3lang files</a>
@@ -214,10 +231,10 @@
         <div class="well"><img class="logo" src="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-IO-Brand-Assets/f1r3fly-io-horizontal-logo-color-on-dark.svg" alt="F1R3FLY.IO logo" /></div>
         <div class="body">
           <h3>F1R3FLY.IO logo</h3>
-          <div class="desc">The full developer-platform lockup &mdash; bug plus wordmark. Horizontal and vertical, in color-on-dark, white, white-background, and BW. SVG · PNG · PDF.</div>
+          <div class="desc">The full developer-platform lockup: bug plus wordmark. Horizontal and vertical, in color-on-dark, white, white-background, and BW. SVG · PNG · PDF.</div>
           <div class="btn-row">
             <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-IO-Brand-Assets/f1r3fly-io-horizontal-logo-color-on-dark.zip">Download logo</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/F1R3FLY-io/f1r3fly-brand-portal/tree/main/F1R3FLY-IO-Brand-Assets">Browse all .IO files</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1R3FLY-IO-Brand-Assets">Browse all .IO files</a>
           </div>
         </div>
       </div>
@@ -226,10 +243,10 @@
         <div class="well"><img class="icon" src="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-IO-Brand-Assets/f1r3fly-io-bug-icon-color-on-dark.svg" alt="F1R3FLY.IO bug icon" /></div>
         <div class="body">
           <h3>F1R3FLY.IO bug icon</h3>
-          <div class="desc">The firefly bug on its own &mdash; for avatars, favicons, and app icons. It&rsquo;s a badge, not a substitute for the full logo on covers or public pieces.</div>
+          <div class="desc">The firefly bug on its own, for avatars, favicons, and app icons. It&rsquo;s a badge, not a substitute for the full logo on covers or public pieces.</div>
           <div class="btn-row">
             <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-IO-Brand-Assets/f1r3fly-io-bug-icon-color-on-dark.zip">Download icon</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/F1R3FLY-io/f1r3fly-brand-portal/tree/main/F1R3FLY-IO-Brand-Assets">Browse icons</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1R3FLY-IO-Brand-Assets">Browse icons</a>
           </div>
         </div>
       </div>
@@ -238,10 +255,10 @@
         <div class="well"><img class="logo" src="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-Industries-Brand-Assets/f1r3fly-industries-horizontal-logo-color-on-dark.svg" alt="F1R3FLY Industries logo" /></div>
         <div class="body">
           <h3>F1R3FLY Industries logo</h3>
-          <div class="desc">The full parent-brand lockup &mdash; knot plus wordmark. Horizontal, vertical, and circle, in color-on-dark, color-on-light, bw-on-light, and white. SVG · PNG · PDF.</div>
+          <div class="desc">The full parent-brand lockup: knot plus wordmark. Horizontal, vertical, and circle, in color-on-dark, color-on-light, bw-on-light, and white. SVG · PNG · PDF.</div>
           <div class="btn-row">
             <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-Industries-Brand-Assets/f1r3fly-industries-horizontal-logo-color-on-dark.zip">Download logo</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/F1R3FLY-io/f1r3fly-brand-portal/tree/main/F1R3FLY-Industries-Brand-Assets">Browse all Industries files</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1R3FLY-Industries-Brand-Assets">Browse all Industries files</a>
           </div>
         </div>
       </div>
@@ -250,10 +267,10 @@
         <div class="well"><img class="icon" src="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-Industries-Brand-Assets/f1r3fly-industries-knot-icon-color-on-dark.svg" alt="F1R3FLY Industries knot icon" /></div>
         <div class="body">
           <h3>F1R3FLY Industries knot icon</h3>
-          <div class="desc">The trefoil knot on its own &mdash; for avatars, favicons, and app icons. Use the full logo on covers and anywhere public-facing.</div>
+          <div class="desc">The trefoil knot on its own, for avatars, favicons, and app icons. Use the full logo on covers and anywhere public-facing.</div>
           <div class="btn-row">
             <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-Industries-Brand-Assets/f1r3fly-industries-knot-icon-color-on-dark.zip">Download icon</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/F1R3FLY-io/f1r3fly-brand-portal/tree/main/F1R3FLY-Industries-Brand-Assets">Browse icons</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1R3FLY-Industries-Brand-Assets">Browse icons</a>
           </div>
         </div>
       </div>
@@ -294,13 +311,13 @@
         <div class="well" style="flex-direction:column;gap:7px;align-items:flex-start;padding:30px 32px">
           <span style="font-family:'League Spartan',sans-serif;font-weight:700;font-size:2rem;line-height:1">League Spartan</span>
           <span style="font-family:var(--font);font-weight:700;font-size:0.72rem;letter-spacing:0.14em;color:var(--yellow)">HEADINGS · UI</span>
-          <span style="font-family:var(--font);font-weight:400;font-size:1.08rem;color:var(--text-dim);margin-top:10px">Source Sans 3 &mdash; body text</span>
+          <span style="font-family:var(--font);font-weight:400;font-size:1.08rem;color:var(--text-dim);margin-top:10px">Source Sans 3 · body text</span>
         </div>
         <div class="body">
           <h3>Fonts</h3>
           <div class="desc">League Spartan (Light, Regular, SemiBold, Bold) for headings and UI; Source Sans 3 for body text. Both are free under the SIL Open Font License, on Google Fonts. Josefin Sans is retired. Brandon Grotesque lives only inside the logo files; never typeset it yourself.</div>
           <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://github.com/F1R3FLY-io/f1r3fly-brand-portal/tree/main/f1r3fly-brand-fonts">Download fonts</a>
+            <a class="btn primary" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/f1r3fly-brand-fonts">Download fonts</a>
             <a class="btn" target="_blank" rel="noopener" href="https://fonts.google.com/specimen/Source+Sans+3">Google Fonts</a>
           </div>
         </div>
@@ -323,7 +340,7 @@
         <div class="well"><img class="cover" src="templates/f1r3fly-brand-grid-preview.png" alt="F1R3FLY layout grid shown over a social post" /></div>
         <div class="body">
           <h3>Layout grid</h3>
-          <div class="desc">The 6-column grid behind every F1R3FLY layout &mdash; the same one in the brand books. Drop it over your artboard to keep margins, columns, and baselines consistent across anything you build. PNG · SVG · PDF.</div>
+          <div class="desc">The 6-column grid behind every F1R3FLY layout, the same one in the brand books. Drop it over your artboard to keep margins, columns, and baselines consistent across anything you build. PNG · SVG · PDF.</div>
           <div class="btn-row">
             <a class="btn primary" target="_blank" rel="noopener" href="templates/f1r3fly-brand-grid.zip">Download grid (.zip)</a>
             <a class="btn" target="_blank" rel="noopener" href="templates/f1r3fly-brand-grid.svg">SVG</a>
@@ -339,14 +356,84 @@
         </div>
         <div class="body">
           <h3>Social templates</h3>
-          <div class="desc">Ready-to-post square 1080 layouts &mdash; announcements, quotes, stats, and taglines. Grab the PNG to post now, or the editable SVG/PDF source to customize.</div>
+          <div class="desc">Ready-to-post square 1080 layouts: announcements, quotes, stats, and taglines. Grab the PNG to post now, or the editable SVG/PDF source to customize.</div>
           <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://github.com/F1R3FLY-io/f1r3fly-brand-portal/tree/main/templates/social-media-templates/linkedin-post">Browse templates</a>
+            <a class="btn primary" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/templates/social-media-templates/linkedin-post">Browse templates</a>
           </div>
         </div>
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- SOCIAL MEDIA -->
+<section id="social">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Social media</h2>
+      <span class="hint">Profile pictures and animated post templates</span>
+    </div>
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="well">
+          <img class="avatar" src="F1R3FLY-IO-Brand-Assets/social-media/f1r3fly-io-avatar-bug-wordmark-ring.svg" alt="F1R3FLY.IO profile picture: bug and wordmark in a ring" />
+          <img class="avatar sq" src="F1R3FLY-IO-Brand-Assets/social-media/f1r3fly-io-avatar-bug-square-black.svg" alt="F1R3FLY.IO profile picture: bug on black" />
+        </div>
+        <div class="body">
+          <h3>F1R3FLY.IO profile pictures</h3>
+          <div class="meta">YouTube · X · Bluesky · LinkedIn</div>
+          <div class="desc">Made for the profile slot on each platform. The bug and wordmark in a thin ring for YouTube, X, and Bluesky. The bug alone on black for LinkedIn. 2000 × 2000. SVG · PNG · PDF.</div>
+          <div class="btn-row">
+            <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-IO-Brand-Assets/social-media/f1r3fly-io-avatar-bug-wordmark-ring.zip">Ring (.zip)</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-IO-Brand-Assets/social-media/f1r3fly-io-avatar-bug-square-black.zip">Square (.zip)</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1R3FLY-IO-Brand-Assets/social-media">Browse</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="well thumbs two"><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-01-logo-intro-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-01-logo-intro-square.mp4" aria-label="Template 01 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-01-logo-intro-portrait-thumb.png" src="templates/canva-animated/f1r3fly-io-template-01-logo-intro-portrait.mp4" aria-label="Template 01 preview"></video></div>
+        <div class="body">
+          <h3>Logo intro</h3>
+          <div class="meta">Animated Canva template 01 · Square and Portrait</div>
+          <div class="desc">The F1R3FLY.IO logo rises in, then the eyebrow, headline, and bullets. Open it in Canva for your own editable copy. Hover or tap a preview to play it.</div>
+          <div class="btn-row">
+            <a class="btn primary" target="_blank" rel="noopener" href="https://canva.link/8gpidz1itwsumvk">Open in Canva: Square</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://canva.link/ni2jv95vgtj2fw3">Portrait</a>
+          </div>
+          <div class="dl-row"><b>MP4:</b> <a href="templates/canva-animated/f1r3fly-io-template-01-logo-intro-square.mp4" download>Square</a> · <a href="templates/canva-animated/f1r3fly-io-template-01-logo-intro-portrait.mp4" download>Portrait</a></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="well thumbs four"><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-02-grey-to-navy-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-02-grey-to-navy-square.mp4" aria-label="Template 02 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-03-teal-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-03-teal-square.mp4" aria-label="Template 03 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-04-magenta-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-04-magenta-square.mp4" aria-label="Template 04 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-05-green-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-05-green-square.mp4" aria-label="Template 05 preview"></video></div>
+        <div class="body">
+          <h3>Gradient backgrounds</h3>
+          <div class="meta">Animated Canva templates 02 to 05 · Square and Portrait</div>
+          <div class="desc">The four website section colors behind the same text animation: grey to navy, teal, magenta, and green. All four come in one Canva file; keep the page you need.</div>
+          <div class="btn-row">
+            <a class="btn primary" target="_blank" rel="noopener" href="https://canva.link/faibjulz5u3rop1">Open in Canva: Square</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://canva.link/7pooqvi22t905u9">Portrait</a>
+          </div>
+          <div class="dl-row"><b>MP4, square:</b> <a href="templates/canva-animated/f1r3fly-io-template-02-grey-to-navy-square.mp4" download>02</a> · <a href="templates/canva-animated/f1r3fly-io-template-03-teal-square.mp4" download>03</a> · <a href="templates/canva-animated/f1r3fly-io-template-04-magenta-square.mp4" download>04</a> · <a href="templates/canva-animated/f1r3fly-io-template-05-green-square.mp4" download>05</a></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="well thumbs five"><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-06-panel-loop-grey-to-navy-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-06-panel-loop-grey-to-navy-square.mp4" aria-label="Template 06 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-07-panel-loop-teal-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-07-panel-loop-teal-square.mp4" aria-label="Template 07 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-08-panel-loop-magenta-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-08-panel-loop-magenta-square.mp4" aria-label="Template 08 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-09-firefly-panel-straight-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-09-firefly-panel-straight-square.mp4" aria-label="Template 09 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-10-firefly-panel-curved-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-10-firefly-panel-curved-square.mp4" aria-label="Template 10 preview"></video></div>
+        <div class="body">
+          <h3>Panel loops</h3>
+          <div class="meta">Animated Canva templates 06 to 10 · Square</div>
+          <div class="desc">A looping video panel beside the text: three gradient loops and two firefly loops.</div>
+          <!--CANVA-06-10-->
+          <div class="dl-row"><b>MP4, square:</b> <a href="templates/canva-animated/f1r3fly-io-template-06-panel-loop-grey-to-navy-square.mp4" download>06</a> · <a href="templates/canva-animated/f1r3fly-io-template-07-panel-loop-teal-square.mp4" download>07</a> · <a href="templates/canva-animated/f1r3fly-io-template-08-panel-loop-magenta-square.mp4" download>08</a> · <a href="templates/canva-animated/f1r3fly-io-template-09-firefly-panel-straight-square.mp4" download>09</a> · <a href="templates/canva-animated/f1r3fly-io-template-10-firefly-panel-curved-square.mp4" download>10</a></div>
+        </div>
+      </div>
+
+    </div>
+    <p class="section-note"><b>How &ldquo;Open in Canva&rdquo; works:</b> you get your own copy in a free Canva account (sign-in required), and the original stays as it is. For the full type weights, install League Spartan and Source Sans 3 from <a href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/f1r3fly-brand-fonts" target="_blank" rel="noopener">the brand fonts</a> or <a href="https://fonts.google.com/specimen/League+Spartan" target="_blank" rel="noopener">Google Fonts</a>.</p>
   </div>
 </section>
 
@@ -366,10 +453,10 @@
         </div>
         <div class="body">
           <h3>Brand kit skill</h3>
-          <div class="desc">A machine-readable brand spec for Claude, ChatGPT, and other AI tools &mdash; exact colors, type, logo rules, and voice, so anything they generate comes out on-brand the first time. Install the skill, or read the spec.</div>
+          <div class="desc">A machine-readable brand spec for Claude, ChatGPT, and other AI tools: exact colors, type, logo rules, and voice, so anything they generate comes out on-brand the first time. Install the skill, or read the spec.</div>
           <div class="btn-row">
             <a class="btn primary" target="_blank" rel="noopener" href="f1r3fly-brand-kit/f1r3fly-brand-kit.skill">Download skill</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/F1R3FLY-io/f1r3fly-brand-portal/blob/main/f1r3fly-brand-kit/SKILL.md">Read the spec</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/blob/main/f1r3fly-brand-kit/SKILL.md">Read the spec</a>
           </div>
         </div>
       </div>
@@ -388,11 +475,11 @@
               <tr><td class="need">You&rsquo;re printing in just black and white</td><td><code>bw-on-light</code> (knot) or <code>BW-white-background</code> (bug)</td><td>PDF or SVG</td></tr>
               <tr><td class="need">It goes on a photo or a bright color</td><td>the <code>white</code> logo</td><td>SVG (or PNG)</td></tr>
               <tr><td class="need">You need a tiny icon, like a profile picture</td><td>the knot (Industries) or the bug (.IO)</td><td>SVG or PNG</td></tr>
-              <tr><td class="need">You&rsquo;re not sure which brand</td><td>Knot = Industries. Bug = F1R3FLY.IO.</td><td>&mdash;</td></tr>
+              <tr><td class="need">You&rsquo;re not sure which brand</td><td>Knot = Industries. Bug = F1R3FLY.IO.</td><td>Any</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="filehelp">New to the file types? <b>SVG</b> stays sharp at any size &mdash; use it when you can. <b>PNG</b> is a picture with a see-through background. <b>PDF</b> is best for printing or just looking.</p>
+        <p class="filehelp">New to the file types? <b>SVG</b> stays sharp at any size; use it when you can. <b>PNG</b> is a picture with a see-through background. <b>PDF</b> is best for printing or just looking.</p>
       </div>
 
     </div>
@@ -404,10 +491,19 @@
     <hr class="grad-rule" style="margin-bottom:26px" />
     <div class="frow">
       <p>&copy; F1R3FLY Industries, 2026. All rights reserved.</p>
-      <p><a class="repo" target="_blank" rel="noopener" href="https://github.com/F1R3FLY-io/f1r3fly-brand-portal">View the repository &rarr;</a></p>
+      <p><a class="repo" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal">View the repository &rarr;</a></p>
     </div>
   </div>
 </footer>
 
+<script>
+  // Animated template previews: play on hover or tap, pause when the pointer leaves.
+  document.querySelectorAll('.well.thumbs video').forEach(function (v) {
+    var play = function () { try { v.play(); } catch (e) {} };
+    v.addEventListener('mouseenter', play);
+    v.addEventListener('mouseleave', function () { v.pause(); });
+    v.addEventListener('click', function () { v.paused ? play() : v.pause(); });
+  });
+</script>
 </body>
 </html>
