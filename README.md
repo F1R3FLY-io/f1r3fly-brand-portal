@@ -2,7 +2,7 @@
 
 **Every F1R3FLY logo, color, and font, in one place.**
 
-*Last update: October 19, 2026*
+*Last update: October 20, 2026*
 
 [**→ Open the visual brand portal**](https://hannahadamsdesign-spec.github.io/f1r3fly-brand-portal/)
 
@@ -11,6 +11,8 @@ Three brands live here, and they use different logos:
 - **F1R3FLY Industries**: the parent brand. Trefoil **knot**.
 - **F1R3FLY.IO**: the developer platform. Firefly **bug**.
 - **f1r3lang**: the language (formerly Rholang). **f1r3lang** wordmark.
+
+Plus the product marks for **F1R3Gaze** (the browser, an **eye**) and **ign1t10n** (its installer, an **on-button**).
 
 If you just want a file fast, use the [visual portal](https://hannahadamsdesign-spec.github.io/f1r3fly-brand-portal/). To browse the folders directly, start below.
 
@@ -32,6 +34,8 @@ The deep reference for each brand: logo construction, clearspace, architecture, 
 | **[F1R3FLY Industries logo →](F1R3FLY-Industries-Brand-Assets)** | horizontal, vertical, circle | `color-on-dark`, `color-on-light`, `bw-on-light`, `white` |
 | **[F1R3FLY Industries knot icon →](F1R3FLY-Industries-Brand-Assets)** | knot, circle icon | for avatars, favicons, app icons |
 | **[f1r3lang logo →](F1r3lang-Brand-Assets)** | wordmark | `color-on-dark`, `color-on-light`, `white`, `black` (transparent), plus `-solid` versions on black or white |
+| **[F1R3Gaze logo →](F1R3Gaze-Brand-Assets)** | horizontal, vertical, app icon | `color-on-dark`, `white`, `black` (lockups are drafts pending sign-off) |
+| **[ign1t10n logo →](ign1t10n-Brand-Assets)** | horizontal, vertical, app icon | `color-on-dark`, `white`, `black` (lockups are drafts pending sign-off) |
 
 Formats: SVG · PNG · PDF. The icon alone is a badge; use the full logo on covers and public pieces.
 
