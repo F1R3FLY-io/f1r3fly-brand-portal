@@ -140,7 +140,7 @@ def page_top(root, title, h1):
 def dl_card(base, name, bg, dims, exts=('pdf', 'jpg', 'svg', 'png'), note=None, img=None, imgcls=''):
     cls = imgcls or ('tall' if dims and dims['h'] > dims['w'] else '')
     if base.endswith(('-onblack', '-onwhite')) and 'round' not in cls: cls += ' panel'
-    wellcls = bg if base.endswith(('-onblack', '-onwhite')) or '-post-' in base else f'checker {bg}'
+    wellcls = bg if '-post-' in base else f'checker {bg}'
     n = f'<div class="meta">{html.escape(note)}</div>' if note else ''
     btns = ''.join(f'<a class="btn" href="{base}.{e}" download>{e.upper()}</a>' for e in exts)
     return f"""<div class="card"><div class="well {wellcls}"><img class="{cls.strip()}" src="{img or base + '.svg'}" alt="{html.escape(name)}" loading="lazy"></div>
