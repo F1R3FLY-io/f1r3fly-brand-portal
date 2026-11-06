@@ -1,98 +1,143 @@
 # F1R3FLY Brand Portal
 
-**Every F1R3FLY logo, color, and font, in one place.**
+Live site: **https://hannahadamsdesign-spec.github.io/f1r3fly-brand-portal/**
 
-*Last update: October 20, 2026*
+Everything for the F1R3FLY brands in one place: the brand books, every logo variant with a preview and a download in PDF, JPG, SVG, PNG or all four zipped, the color system, fonts, the layout grid, social templates, and the AI brand kit.
 
-[**→ Open the visual brand portal**](https://hannahadamsdesign-spec.github.io/f1r3fly-brand-portal/)
+Last update: November 6, 2026. Reorganised 2026-11-06: new folder layout, new file names, one preview page per brand.
 
-Three brands live here, and they use different logos:
+## Where things are
 
-- **F1R3FLY Industries**: the parent brand. Trefoil **knot**.
-- **F1R3FLY.IO**: the developer platform. Firefly **bug**.
-- **f1r3lang**: the language (formerly Rholang). **f1r3lang** wordmark.
-
-Plus the product marks for **F1R3Gaze** (the browser, an **eye**) and **ign1t10n** (its installer, an **on-button**).
-
-If you just want a file fast, use the [visual portal](https://hannahadamsdesign-spec.github.io/f1r3fly-brand-portal/). To browse the folders directly, start below.
-
-Source repo: [hannahadamsdesign-spec/f1r3fly-brand-portal](https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal). The portal and all downloads are served from here. An org fork also exists at [github.com/F1R3FLY-io/f1r3fly-brand-portal](https://github.com/F1R3FLY-io/f1r3fly-brand-portal); it is a fork and may lag behind this repo.
-
-## Brand books
-
-The deep reference for each brand: logo construction, clearspace, architecture, grid, color, type, and voice.
-
-- **[F1R3FLY Industries Brand Style Guide (PDF)](F1R3FLY%20INDUSTRIES-Brand%20Style%20Guide.pdf)** · the trefoil-knot master brand
-- **[F1R3FLY.IO Brand Guidebook (PDF)](F1R3FLY.IO-Brand%20Guidebook.pdf)** · the firefly-bug developer platform
-
-## Logos
-
-| | Lockups | Variants |
+| Brand | Folder | What |
 |---|---|---|
-| **[F1R3FLY.IO logo →](F1R3FLY-IO-Brand-Assets)** | horizontal, vertical | `color-on-dark`, `white`, `white-background`, `BW-white-background` |
-| **[F1R3FLY.IO bug icon →](F1R3FLY-IO-Brand-Assets)** | bug, circle icon | for avatars, favicons, app icons |
-| **[F1R3FLY Industries logo →](F1R3FLY-Industries-Brand-Assets)** | horizontal, vertical, circle | `color-on-dark`, `color-on-light`, `bw-on-light`, `white` |
-| **[F1R3FLY Industries knot icon →](F1R3FLY-Industries-Brand-Assets)** | knot, circle icon | for avatars, favicons, app icons |
-| **[f1r3lang logo →](F1r3lang-Brand-Assets)** | wordmark | `color-on-dark`, `color-on-light`, `white`, `black` (transparent), plus `-solid` versions on black or white |
-| **[F1R3Gaze logo →](F1R3Gaze-Brand-Assets)** | horizontal, vertical, app icon | `color-on-dark`, `white`, `black` (lockups are drafts pending sign-off) |
-| **[ign1t10n logo →](ign1t10n-Brand-Assets)** | horizontal, vertical, app icon | `color-on-dark`, `white`, `black` (lockups are drafts pending sign-off) |
+| **[F1R3FLY.IO →](logos/ff.io/)** | `logos/ff.io/` | 15 variants |
+| **[F1R3FLY Industries →](logos/ff.indust/)** | `logos/ff.indust/` | 14 variants |
+| **[f1r3lang →](logos/flang/)** | `logos/flang/` | 8 variants |
+| **[ign1t10n →](products/ign/)** | `products/ign/` | 7 variants |
 
-Formats: SVG · PNG · PDF. The icon alone is a badge; use the full logo on covers and public pieces.
+- `books/` the two brand books (PDF) and their cover images
+- `system/` color system PDF, swatch pack, layout grid
+- `fonts/` League Spartan and Source Sans 3 (SIL OFL), plus `ff-fonts.zip`
+- `social/templates/` sixteen 1080 x 1080 post templates, [preview page](social/templates/)
+- `social/canva/` MP4 previews and thumbnails of the animated Canva templates (links on the home page)
+- `kit/` the AI brand kit skill (`f1r3fly-brand-kit.skill`) and its spec (`SKILL.md`)
+- `build/` the manifest and the script that generates the pages and files
+- `_archive/` retired files, including F1R3Gaze (the browser was renamed; its marks are no longer in use)
 
-## Color & type
-
-- **Colors:** Black `#000000`, White `#FFFFFF`, Brand Yellow `#F3D630`, Brand Sky `#3FA9F5`. Signature gradient runs yellow → sky.
-  - [Color system PDF](F1R3FLY-Industries-Brand-Assets/f1r3fly-brand-color-system-06.12.2026.pdf)
-  - [Swatch pack (.zip)](swatches/f1r3fly-brand-swatches.zip): drops the palette into Illustrator, Photoshop, and Canva
-- **Fonts:** [League Spartan + Source Sans 3](f1r3fly-brand-fonts) (free, SIL OFL; license texts are in the folder). League Spartan (Light, Regular, SemiBold, Bold) for headings and UI, Source Sans 3 for body. Josefin Sans is retired. Never typeset Brandon Grotesque; it lives only inside the logo files.
-
-## Templates & grid
-
-- **[Layout grid (.zip)](templates/f1r3fly-brand-grid.zip)**: the 6-column grid behind every F1R3FLY layout (same one in the brand books). Also [SVG](templates/f1r3fly-brand-grid.svg) · [PDF](templates/f1r3fly-brand-grid.pdf).
-- **[Social templates →](templates/social-media-templates/linkedin-post)**: square 1080 LinkedIn posts (announcements, quotes, stats, taglines), PNG plus editable SVG/PDF source.
-
-## Social media
-
-- **[F1R3FLY.IO profile pictures →](F1R3FLY-IO-Brand-Assets/social-media)**: the bug and wordmark in a ring for YouTube, X, and Bluesky; the bug on black for LinkedIn. 2000 × 2000, SVG · PNG · PDF.
-- **[Animated Canva templates →](templates/canva-animated)**: ten animated post templates (01 logo intro, 02 to 05 gradient backgrounds, 06 to 10 panel loops). The portal links each to a Canva template link, which gives you your own editable copy in a free Canva account. MP4 previews are in the folder.
-
-## AI brand kit
-
-**[Download the skill](f1r3fly-brand-kit/f1r3fly-brand-kit.skill)** · **[Read the spec](f1r3fly-brand-kit/SKILL.md)**
-
-A machine-readable brand spec for Claude, ChatGPT, and other AI tools: exact colors, type, logo rules, and voice, so anything they generate comes out on-brand the first time.
-
-## Which file do I use?
-
-Find what you're doing on the left. Grab the file on the right.
-
-| What you're doing | Pick this one | Best file |
-|---|---|---|
-| Your background is dark or black | the `color-on-dark` logo | SVG (or PNG) |
-| Your background is white or light | `color-on-light` (knot) or `white-background` (bug) | SVG (or PNG) |
-| You're printing in just black and white | `bw-on-light` (knot) or `BW-white-background` (bug) | PDF or SVG |
-| It goes on a photo or a bright color | the `white` logo | SVG (or PNG) |
-| You need a tiny icon, like a profile picture | the knot (Industries) or the bug (.IO) | SVG or PNG |
-| You're not sure which brand | Knot = Industries. Bug = F1R3FLY.IO. | n/a |
-
-**New to the file types?** SVG stays sharp at any size; use it when you can. PNG is a picture with a see-through background. PDF is best for printing or just looking.
-
-## What's in this repo
+## File names
 
 ```
-f1r3fly-brand-portal/
-├── F1R3FLY-Industries-Brand-Assets/   knot logos + color system + swatches
-├── F1R3FLY-IO-Brand-Assets/           bug logos (+ social-media/)
-├── F1r3lang-Brand-Assets/             f1r3lang wordmark (color / white / black)
-├── f1r3fly-brand-fonts/               League Spartan + Source Sans 3 (+ OFL license texts)
-├── templates/                         layout grid + social templates
-├── swatches/                          Illustrator / Photoshop / Canva swatch pack
-├── f1r3fly-brand-kit/                 AI brand kit (skill + spec)
-├── book-covers/                       cover thumbnails for the portal
-├── F1R3FLY INDUSTRIES-Brand Style Guide.pdf
-└── F1R3FLY.IO-Brand Guidebook.pdf
+[brand]-[piece]-[layout]-[colorway]-[background].[ext]
 ```
 
----
+- brand: `ff.io` (F1R3FLY.IO), `ff.indust` (F1R3FLY Industries), `flang` (f1r3lang), `ign` (ign1t10n)
+- piece: `logo` (mark + wordmark), `icon` (mark alone), `avatar`, `post`, `canva`
+- layout: `wide`, `stacked`, `circle` (the mark inside a black circle), `ring`, `square`
+- colorway: `color`, `white`, `black`
+- background: `transp-dark` (transparent, made for dark backgrounds, white wordmark), `transp-light` (transparent, for light backgrounds, black wordmark), `transp` (icons, no wordmark), `onblack`, `onwhite` (background baked in)
 
-<sub>© F1R3FLY Industries, 2026. All rights reserved. · Maintained by Hannah Adams, Creative Director.</sub>
+Example: `ff.io-logo-stacked-circle-color-transp-dark.png` is the F1R3FLY.IO bug in a black circle with the wordmark below, in color, transparent, for dark backgrounds.
+
+Every asset ships as `.pdf`, `.jpg`, `.svg`, `.png` and a `.zip` of all four. SVGs use plain presentation attributes (no CSS classes), so they open cleanly in design apps. PNGs are 2048 px on the long side, transparent. JPGs are flattened on #0A0A0A (dark) or white (light).
+
+Raw file base for scripts and AI tools: `https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/`
+
+## Old name → new name
+
+- `f1r3fly-io-horizontal-logo-color-on-dark` → `ff.io-logo-wide-color-transp-dark`
+- `f1r3fly-io-horizontal-logo-color-on-black-solid` → `ff.io-logo-wide-color-onblack`
+- `f1r3fly-io-horizontal-logo-white` → `ff.io-logo-wide-white-transp-dark`
+- `f1r3fly-io-horizontal-logo-white-background` → `ff.io-logo-wide-circle-color-transp-light`
+- `f1r3fly-io-horizontal-logo-BW-white-background` → `ff.io-logo-wide-circle-black-transp-light`
+- `f1r3fly-io-vertical-logo-color-on-dark` → `ff.io-logo-stacked-color-transp-dark`
+- `(new)` → `ff.io-logo-stacked-circle-color-transp-dark`
+- `f1r3fly-io-vertical-logo-white` → `ff.io-logo-stacked-white-transp-dark`
+- `f1r3fly-io-vertical-logo-white-background` → `ff.io-logo-stacked-circle-color-transp-light`
+- `f1r3fly-io-vertical-logo-BW-white-background` → `ff.io-logo-stacked-circle-black-transp-light`
+- `f1r3fly-io-bug-icon-color-on-dark` → `ff.io-icon-bug-color-transp`
+- `f1r3fly-io-circle-icon-color-on-dark` → `ff.io-icon-circle-color-transp`
+- `f1r3fly-io-circle-icon-white` → `ff.io-icon-circle-white-transp`
+- `social-media/f1r3fly-io-avatar-bug-wordmark-ring` → `ff.io-avatar-ring-color-onblack`
+- `social-media/f1r3fly-io-avatar-bug-square-black` → `ff.io-avatar-square-color-onblack`
+- `f1r3fly-industries-horizontal-logo-color-on-dark` → `ff.indust-logo-wide-color-transp-dark`
+- `f1r3fly-industries-horizontal-logo-color-on-black-solid` → `ff.indust-logo-wide-color-onblack`
+- `f1r3fly-industries-horizontal-logo-white` → `ff.indust-logo-wide-white-transp-dark`
+- `f1r3fly-industries-horizontal-logo-color-on-light` → `ff.indust-logo-wide-circle-color-transp-light`
+- `f1r3fly-industries-horizontal-logo-bw-on-light` → `ff.indust-logo-wide-circle-black-transp-light`
+- `f1r3fly-industries-vertical-logo-color-on-dark` → `ff.indust-logo-stacked-color-transp-dark`
+- `f1r3fly-industries-vertical-logo-color-on-black-solid` → `ff.indust-logo-stacked-color-onblack`
+- `f1r3fly-industries-circle-icon-color-on-dark` → `ff.indust-logo-stacked-circle-color-transp-dark`
+- `f1r3fly-industries-vertical-logo-white` → `ff.indust-logo-stacked-white-transp-dark`
+- `f1r3fly-industries-circle-icon-color-on-dark` → `ff.indust-logo-stacked-circle-color-transp-light`
+- `f1r3fly-industries-vertical-logo-bw-on-light` → `ff.indust-logo-stacked-circle-black-transp-light`
+- `f1r3fly-industries-knot-icon-color-on-dark` → `ff.indust-icon-knot-color-transp`
+- `f1r3fly-industries-circle-icon-white` → `ff.indust-icon-knot-white-transp`
+- `f1r3fly-industries-circle-logo-color-on-dark` → `ff.indust-icon-circle-color-transp`
+- `f1r3lang-logo-color-on-dark` → `flang-logo-color-transp-dark`
+- `f1r3lang-logo-color-on-black-solid` → `flang-logo-color-onblack`
+- `f1r3lang-logo-white` → `flang-logo-white-transp-dark`
+- `f1r3lang-logo-white-on-black-solid` → `flang-logo-white-onblack`
+- `f1r3lang-logo-color-on-light` → `flang-logo-color-transp-light`
+- `f1r3lang-logo-color-on-white-solid` → `flang-logo-color-onwhite`
+- `f1r3lang-logo-black` → `flang-logo-black-transp-light`
+- `f1r3lang-logo-black-on-white-solid` → `flang-logo-black-onwhite`
+- `ign1t10n-app-icon` → `ign-icon-app-color-onblack`
+- `ign1t10n-horizontal-logo-color-on-dark` → `ign-logo-wide-color-transp-dark`
+- `ign1t10n-horizontal-logo-white` → `ign-logo-wide-white-transp-dark`
+- `ign1t10n-horizontal-logo-black` → `ign-logo-wide-black-transp-light`
+- `ign1t10n-vertical-logo-color-on-dark` → `ign-logo-stacked-color-transp-dark`
+- `ign1t10n-vertical-logo-white` → `ign-logo-stacked-white-transp-dark`
+- `ign1t10n-vertical-logo-black` → `ign-logo-stacked-black-transp-light`
+- `f1r3fly-io-social-square-1080-announcement-dark-orb` → `ff.io-post-square-announcement-dark-orb`
+- `f1r3fly-io-social-square-1080-announcement-section-teal` → `ff.io-post-square-announcement-section-teal`
+- `f1r3fly-io-social-square-1080-article-dark-orb` → `ff.io-post-square-article-dark-orb`
+- `f1r3fly-io-social-square-1080-article-section-purple` → `ff.io-post-square-article-section-purple`
+- `f1r3fly-io-social-square-1080-event-dark-orb` → `ff.io-post-square-event-dark-orb`
+- `f1r3fly-io-social-square-1080-event-section-teal` → `ff.io-post-square-event-section-teal`
+- `f1r3fly-io-social-square-1080-quote-dark-orb` → `ff.io-post-square-quote-dark-orb`
+- `f1r3fly-io-social-square-1080-quote-section-purple` → `ff.io-post-square-quote-section-purple`
+- `f1r3fly-io-social-square-1080-stat-gradient-brand-ellipse` → `ff.io-post-square-stat-gradient-brand-ellipse`
+- `f1r3fly-io-social-square-1080-stat-gradient-dark-orb` → `ff.io-post-square-stat-gradient-dark-orb`
+- `f1r3fly-io-social-square-1080-stat-yellow-dark-orb` → `ff.io-post-square-stat-yellow-dark-orb`
+- `f1r3fly-io-social-square-1080-tagline-bold-brand-ellipse` → `ff.io-post-square-tagline-bold-brand-ellipse`
+- `f1r3fly-io-social-square-1080-tagline-bold-dark-orb` → `ff.io-post-square-tagline-bold-dark-orb`
+- `f1r3fly-io-social-square-1080-tagline-thin-dark-orb` → `ff.io-post-square-tagline-thin-dark-orb`
+- `f1r3fly-io-social-square-1080-tagline-thin-light` → `ff.io-post-square-tagline-thin-light`
+- `f1r3fly-io-social-square-1080-tagline-thin-section-teal` → `ff.io-post-square-tagline-thin-section-teal`
+- `f1r3fly-io-template-01-logo-intro-square.mp4` → `ff.io-canva-01-logo-intro-square.mp4`
+- `f1r3fly-io-template-01-logo-intro-square-thumb.png` → `ff.io-canva-01-logo-intro-square-thumb.png`
+- `f1r3fly-io-template-01-logo-intro-portrait.mp4` → `ff.io-canva-01-logo-intro-portrait.mp4`
+- `f1r3fly-io-template-01-logo-intro-portrait-thumb.png` → `ff.io-canva-01-logo-intro-portrait-thumb.png`
+- `f1r3fly-io-template-02-grey-to-navy-square.mp4` → `ff.io-canva-02-grey-to-navy-square.mp4`
+- `f1r3fly-io-template-02-grey-to-navy-square-thumb.png` → `ff.io-canva-02-grey-to-navy-square-thumb.png`
+- `f1r3fly-io-template-02-grey-to-navy-portrait.mp4` → `ff.io-canva-02-grey-to-navy-portrait.mp4`
+- `f1r3fly-io-template-03-teal-square.mp4` → `ff.io-canva-03-teal-square.mp4`
+- `f1r3fly-io-template-03-teal-square-thumb.png` → `ff.io-canva-03-teal-square-thumb.png`
+- `f1r3fly-io-template-03-teal-portrait.mp4` → `ff.io-canva-03-teal-portrait.mp4`
+- `f1r3fly-io-template-04-magenta-square.mp4` → `ff.io-canva-04-magenta-square.mp4`
+- `f1r3fly-io-template-04-magenta-square-thumb.png` → `ff.io-canva-04-magenta-square-thumb.png`
+- `f1r3fly-io-template-04-magenta-portrait.mp4` → `ff.io-canva-04-magenta-portrait.mp4`
+- `f1r3fly-io-template-05-green-square.mp4` → `ff.io-canva-05-green-square.mp4`
+- `f1r3fly-io-template-05-green-square-thumb.png` → `ff.io-canva-05-green-square-thumb.png`
+- `f1r3fly-io-template-05-green-portrait.mp4` → `ff.io-canva-05-green-portrait.mp4`
+- `f1r3fly-io-template-06-panel-loop-grey-to-navy-square.mp4` → `ff.io-canva-06-panel-loop-grey-to-navy-square.mp4`
+- `f1r3fly-io-template-06-panel-loop-grey-to-navy-square-thumb.png` → `ff.io-canva-06-panel-loop-grey-to-navy-square-thumb.png`
+- `f1r3fly-io-template-07-panel-loop-teal-square.mp4` → `ff.io-canva-07-panel-loop-teal-square.mp4`
+- `f1r3fly-io-template-07-panel-loop-teal-square-thumb.png` → `ff.io-canva-07-panel-loop-teal-square-thumb.png`
+- `f1r3fly-io-template-08-panel-loop-magenta-square.mp4` → `ff.io-canva-08-panel-loop-magenta-square.mp4`
+- `f1r3fly-io-template-08-panel-loop-magenta-square-thumb.png` → `ff.io-canva-08-panel-loop-magenta-square-thumb.png`
+- `f1r3fly-io-template-09-firefly-panel-straight-square.mp4` → `ff.io-canva-09-firefly-panel-straight-square.mp4`
+- `f1r3fly-io-template-09-firefly-panel-straight-square-thumb.png` → `ff.io-canva-09-firefly-panel-straight-square-thumb.png`
+- `f1r3fly-io-template-10-firefly-panel-curved-square.mp4` → `ff.io-canva-10-firefly-panel-curved-square.mp4`
+- `f1r3fly-io-template-10-firefly-panel-curved-square-thumb.png` → `ff.io-canva-10-firefly-panel-curved-square-thumb.png`
+- `F1R3FLY INDUSTRIES-Brand Style Guide.pdf` → `books/ff.indust-brand-style-guide-2026-09.pdf`
+- `F1R3FLY.IO-Brand Guidebook.pdf` → `books/ff.io-brand-guidebook-2026-09.pdf`
+- `f1r3fly-brand-color-system-06.12.2026.pdf` → `system/ff-color-system-2026-06.pdf`
+- `swatches/f1r3fly-brand-swatches.zip` → `system/ff-swatches.zip`
+- `templates/f1r3fly-brand-grid.*` → `system/ff-grid.*`
+
+## Maintaining it
+
+Edit `build/assets.json`, drop new source SVG/PDF files beside the old ones (or under `build/NEW/`), run `python3 build/build.py <this repo> <output>`, and copy the output in. The manifest is the single list of what exists; the pages are generated from it.
+
+Source repo: [https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal](https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal). The org fork `F1R3FLY-io/f1r3fly-brand-portal` mirrors this repo; this one is upstream.
