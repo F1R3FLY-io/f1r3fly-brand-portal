@@ -54,7 +54,42 @@ def build_asset(svg_text, src_pdf, base, bg, dest):
         for ext in ('pdf', 'jpg', 'svg', 'png'): z.write(os.path.join(dest, f'{base}.{ext}'), f'{base}.{ext}')
     return {'w': im.width, 'h': im.height}
 
+def measure_cap(svg_text, ink):
+    """Height of the wordmark band: rows containing pure white (or pure black) pixels in a render of the SVG."""
+    import io
+    png = cairosvg.svg2png(bytestring=svg_text.encode(), output_width=1600)
+    im = Image.open(io.BytesIO(png)).convert('RGBA'); px = im.load(); W, H = im.size
+    rows = []
+    for y in range(H):
+        hit = 0
+        for x in range(0, W, 2):
+            r, g, b, al = px[x, y]
+            if al > 200 and ((ink == 'light' and r > 235 and g > 235 and b > 235) or (ink == 'dark' and r < 25 and g < 25 and b < 25)): hit += 1
+            if hit > 3: rows.append(y); break
+    bands = []
+    for y in rows:
+        if bands and y - bands[-1][-1] <= 2: bands[-1].append(y)
+        else: bands.append([y])
+    band = bands[-1]  # the wordmark is the lowest band (stacked) or the only one (wide)
+    return (band[-1] - band[0] + 1) / H  # as a fraction of the SVG height
+
+def with_panel(svg_text, panel, margin_frac_h):
+    """Wrap the SVG in a panel of colour `panel` with a margin of margin_frac_h * height on every side."""
+    vb = re.search(r'viewBox="([^"]+)"', svg_text).group(1)
+    x, y, w, h = [float(v) for v in vb.replace(',', ' ').split()]
+    m = margin_frac_h * h
+    inner = re.search(r'<svg[^>]*>(.*)</svg>', svg_text, re.S).group(1)
+    return (f'<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" '
+            f'viewBox="{x-m:.3f} {y-m:.3f} {w+2*m:.3f} {h+2*m:.3f}">\n<rect x="{x-m:.3f}" y="{y-m:.3f}" width="{w+2*m:.3f}" height="{h+2*m:.3f}" fill="{panel}"/>\n{inner}\n</svg>')
+
 def brand_asset(brand, a, dest):
+    if a.get('derive'):
+        d = a['derive']; src = os.path.join(dest, d['from'] + '.svg')
+        base_svg = open(src, encoding='utf-8').read()
+        cap = measure_cap(base_svg, d['ink'])
+        svg = with_panel(base_svg, d['panel'], cap * d['unit'])
+        print('  panel', a['new'], 'cap=%.3f' % cap, 'margin=%.3f h' % (cap * d['unit']))
+        return build_asset(svg, None, a['new'], a['bg'], dest)
     if a.get('old'):
         src_svg = os.path.join(OLD, brand['source_folder'], a['old'] + '.svg')
         src_pdf = os.path.join(OLD, brand['source_folder'], a['old'] + '.pdf')
@@ -102,6 +137,7 @@ section{padding:26px 0}.section-head{display:flex;align-items:baseline;gap:16px;
 .btns{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto;padding-top:10px}
 .btn{font-family:var(--head);font-weight:700;font-size:.8rem;letter-spacing:.04em;padding:9px 13px;border-radius:8px;border:1px solid #20486b;color:var(--white);transition:all .18s;display:inline-block}
 .btn:hover{border-color:var(--sky);color:var(--sky)}.btn.primary{background:var(--btn-gradient);border:0}.btn.primary:hover{color:#fff;filter:brightness(1.1)}
+.brand-block{padding-top:10px;margin-bottom:34px;scroll-margin-top:24px}.brand-title{font-family:var(--head);font-weight:700;font-size:2rem;text-transform:uppercase;margin-top:26px}.brand-intro{color:var(--text-dim);font-size:1.08rem;max-width:52em;margin:4px 0 6px}
 .more{margin-top:14px;font-family:var(--head);font-weight:600;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim)}
 .note{margin-top:18px;font-size:.97rem;color:var(--text-dim);max-width:60em;line-height:1.7}.note b{color:var(--white)}.note a{color:var(--sky);font-weight:600}
 .swrow{display:flex;width:100%;height:188px}.swrow span{flex:1}
@@ -129,13 +165,14 @@ FOOT = """<footer><div class="wrap"><hr class="grad-rule" style="margin-bottom:2
 def side_nav(root, current=''):
     def a(href, label, sub=False, key=''):
         cls = ('sub ' if sub else '') + ('current' if key and key == current else '')
-        return f'<a class="{cls.strip()}" href="{root}{href}">{label}</a>'
+        key_attr = f' data-key="{key}"' if key else ''
+        return f'<a class="{cls.strip()}"{key_attr} href="{root}{href}">{label}</a>'
     return ('<nav class="side" aria-label="Sections">'
-            + a('index.html#books', 'Brand Books') + '<div class="gap"></div>'
-            + a('index.html#logos', 'Primary Logos') + a('logos/ff.io/index.html', 'F1R3FLY.IO', True, 'ff.io') + a('logos/ff.indust/index.html', 'F1R3FLY INDUSTRIES', True, 'ff.indust') + a('logos/flang/index.html', 'F1R3L@NG', True, 'flang') + '<div class="gap"></div>'
-            + a('index.html#products', 'Product Logos') + a('products/ign/index.html', 'ign1t10n', True, 'ign') + '<span class="sub soon">More coming</span><div class="gap"></div>'
-            + a('index.html#system', 'Color, Fonts and Layout') + '<div class="gap"></div>'
-            + a('index.html#social', 'Social Media Assets') + a('social/templates/index.html', 'Post templates', True, 'posts') + '</nav>')
+            + a('index.html#books', 'Brand Books', False, 'books') + '<div class="gap"></div>'
+            + a('index.html#logos', 'Primary Logos', False, 'logos') + a('logos/index.html#ff-io', 'F1R3FLY.IO', True, 'ff.io') + a('logos/index.html#ff-indust', 'F1R3FLY INDUSTRIES', True, 'ff.indust') + a('logos/index.html#flang', 'F1R3L@NG', True, 'flang') + '<div class="gap"></div>'
+            + a('index.html#products', 'Product Logos', False, 'products') + a('logos/index.html#ign', 'ign1t10n', True, 'ign') + '<span class="sub soon">More coming</span><div class="gap"></div>'
+            + a('index.html#system', 'Color, Fonts and Layout', False, 'system') + '<div class="gap"></div>'
+            + a('index.html#social', 'Social Media Assets', False, 'social') + a('logos/index.html#posts', 'Post templates', True, 'posts') + '</nav>')
 
 def crumbs(root, items):
     out = []
@@ -155,31 +192,47 @@ def dl_card(base, name, bg, dims, exts=('pdf', 'jpg', 'svg', 'png'), note=None, 
     n = f'<div class="meta">{html.escape(note)}</div>' if note else ''
     btns = ''.join(f'<a class="btn" href="{base}.{e}" download>{e.upper()}</a>' for e in exts)
     return f"""<div class="card"><div class="well {wellcls}"><img class="{cls.strip()}" src="{img or base + '.svg'}" alt="{html.escape(name)}" loading="lazy"></div>
-<div class="body"><h3>{html.escape(name)}</h3>{n}<div class="file">{base}</div><div class="btns">{btns}<a class="btn primary" href="{base}.zip" download>ALL (zip)</a></div></div></div>"""
+<div class="body"><h3>{html.escape(name)}</h3>{n}<div class="file">{base.split('/')[-1]}</div><div class="btns">{btns}<a class="btn primary" href="{base}.zip" download>ALL (zip)</a></div></div></div>"""
 
 WHICH = ('<div class="which"><h3>Which file?</h3>'
-         '<div><b>Keynote, PowerPoint, Word, Pages, OmniGraffle:</b> PDF or PNG.</div>'
+         '<div><b>PowerPoint, Keynote:</b> SVG (best) or PNG.</div>'
+         '<div><b>Word, Pages, OmniGraffle:</b> PDF or PNG.</div>'
          '<div><b>Web, Canva, Figma, Illustrator:</b> SVG.</div>'
          '<div><b>Email signatures, quick drops:</b> JPG (background baked in).</div>'
          '<div><b>Not sure:</b> ALL (zip) has every format.</div></div>')
 
-def brand_page(brand, dims):
-    root = '../' * (brand['folder'].count('/') + 1)
-    key = brand['folder'].split('/')[-1]
-    out = [HEAD.format(title=f'{brand["title"]} assets · {SITE}', css=CSS, root=root),
-           crumbs(root, [('Home', root + 'index.html'), (brand['group'], f'{root}index.html#{brand["group_anchor"]}'), (brand['title'], 'index.html'), ('Assets', None)]),
-           f'<header class="hero"><div class="wrap"><div class="hero-row"><h1>{html.escape(brand["title"])} assets</h1><div class="last-update">Last update: {UPDATE}</div></div></div></header><div class="wrap"><hr class="grad-rule"></div>',
-           f'<div class="wrap" style="padding-top:30px"><div class="layout">{side_nav(root, key)}<main>',
-           f'<div class="intro" style="padding-top:0"><p>{html.escape(brand["intro"])}</p>{WHICH}</div>']
-    for s_ in brand['sections']:
-        sid = ' id="profile"' if s_['title'] == 'Profile pictures' else ''
-        out.append(f'<section{sid}><div class="section-head"><h2>{html.escape(s_["title"])}</h2><span class="hint">{html.escape(s_["hint"])}</span></div><div class="grid">')
-        out += [dl_card(a['new'], a['name'], a['bg'], dims[a['new']], note=a.get('note'), imgcls='round' if a.get('shape') == 'round' else '') for a in s_['assets']]
-        out.append('</div></section>')
-    out.append('<p class="note"><b>Names:</b> <code>transp-dark</code> is transparent and made for dark backgrounds (white wordmark); <code>transp-light</code> is transparent for light backgrounds (black wordmark); <code>onblack</code> and <code>onwhite</code> have the background baked in.</p>')
-    out.append('</main></div></div>')
-    out.append(FOOT.format(root=root, repo=REPO) + '</body></html>')
+ANCHOR = {'ff.io': 'ff-io', 'ff.indust': 'ff-indust', 'flang': 'flang', 'ign': 'ign'}
+SCROLLSPY = """<script>
+(function(){var links=[].slice.call(document.querySelectorAll('nav.side a[data-key]'));var secs=[].slice.call(document.querySelectorAll('[data-spy]'));if(!secs.length)return;
+var crumb=document.getElementById('crumb-here');
+function set(k){links.forEach(function(a){a.classList.toggle('current',a.getAttribute('data-key')===k)});var s=secs.filter(function(x){return x.getAttribute('data-spy')===k})[0];if(crumb&&s)crumb.textContent=s.getAttribute('data-title')}
+function pick(){var cur=secs[0];secs.forEach(function(x){if(x.getBoundingClientRect().top<=160)cur=x});if(window.innerHeight+window.scrollY>=document.body.scrollHeight-4)cur=secs[secs.length-1];set(cur.getAttribute('data-spy'))}
+window.addEventListener('scroll',pick,{passive:true});window.addEventListener('load',pick);pick()})();
+</script>"""
+
+def assets_page(dims, post_cards):
+    """One continuous page: every brand, then the post templates. Lives at logos/index.html."""
+    root = '../'
+    out = [HEAD.format(title=f'Assets · {SITE}', css=CSS, root=root),
+           f'<div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="{root}index.html">Home</a><span class="sep">&rsaquo;</span><a href="index.html">Assets</a><span class="sep">&rsaquo;</span><span class="here" id="crumb-here">F1R3FLY.IO</span></nav></div>',
+           f'<header class="hero"><div class="wrap"><div class="hero-row"><h1>Assets</h1><div class="last-update">Last update: {UPDATE}</div></div></div></header><div class="wrap"><hr class="grad-rule"></div>',
+           f'<div class="wrap" style="padding-top:30px"><div class="layout">{side_nav(root, "ff.io")}<main>',
+           f'<div class="intro" style="padding-top:0">{WHICH}</div>']
+    for key, brand in M['brands'].items():
+        rel = os.path.relpath(brand['folder'], 'logos') + '/'
+        out.append(f'<div class="brand-block" id="{ANCHOR[key]}" data-spy="{key}" data-title="{html.escape(brand["title"])}"><h2 class="brand-title">{html.escape(brand["title"])}</h2><p class="brand-intro">{html.escape(brand["intro"])}</p>')
+        for s_ in brand['sections']:
+            out.append(f'<section><div class="section-head"><h2>{html.escape(s_["title"])}</h2><span class="hint">{html.escape(s_["hint"])}</span></div><div class="grid">')
+            out += [dl_card(rel + a['new'], a['name'], a['bg'], dims[a['new']], note=a.get('note'), imgcls='round' if a.get('shape') == 'round' else '') for a in s_['assets']]
+            out.append('</div></section>')
+        out.append('</div>')
+    out.append('<div class="brand-block" id="posts" data-spy="posts" data-title="Post templates"><h2 class="brand-title">Social post templates</h2><p class="brand-intro">Ready-to-post 1080 x 1080 layouts for the F1R3FLY.IO feed: announcements, articles, quotes, events, stats and taglines. The PNG is the one to post; the SVG and PDF are the editable source, with headline type outlined. The text is placeholder copy: for your own headline, ask Hannah.</p><section><div class="grid">' + ''.join(post_cards) + '</div></section></div>')
+    out.append('<p class="note"><b>Names:</b> <code>transp-dark</code> is transparent and made for dark backgrounds (white wordmark); <code>transp-light</code> is transparent for light backgrounds (black wordmark); <code>onblack</code> and <code>onwhite</code> have the background baked in, with the brand book\'s clear space around the logo.</p>')
+    out.append('</main></div></div>' + FOOT.format(root=root, repo=REPO) + SCROLLSPY + '</body></html>')
     return '\n'.join(out)
+
+def redirect_stub(target):
+    return f'<!DOCTYPE html><html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0; url={target}"><link rel="canonical" href="{target}"><title>Moved</title></head><body style="background:#000;color:#f2f2f2;font-family:sans-serif;padding:40px"><a href="{target}" style="color:#3fa9f5">Continue to the assets page</a></body></html>'
 
 # ---------------------------------------------------------------- social templates
 POST_SRC = os.path.join(OLD, 'templates/social-media-templates/linkedin-post')
@@ -199,16 +252,9 @@ def build_posts(dest):
         kind = base.split('-')[3]
         label = {'announcement': 'Announcement', 'article': 'Article', 'quote': 'Quote', 'event': 'Event', 'stat': 'Stat', 'tagline': 'Tagline'}[kind]
         variant = base.replace(f'ff.io-post-square-{kind}-', '').replace('-', ' ')
-        cards.append(dl_card(base, f'{label}: {variant}', 'dark', None, img=base + '.png', imgcls='post'))
-    root = '../../'
-    page = [HEAD.format(title=f'Social post templates · {SITE}', css=CSS, root=root),
-            crumbs(root, [('Home', root + 'index.html'), ('Social media assets', f'{root}index.html#social'), ('Post templates', None)]),
-            f'<header class="hero"><div class="wrap"><div class="hero-row"><h1>Social post templates</h1><div class="last-update">Last update: {UPDATE}</div></div></div></header><div class="wrap"><hr class="grad-rule"></div>',
-            f'<div class="wrap" style="padding-top:30px"><div class="layout">{side_nav(root, "posts")}<main>',
-            '<div class="intro" style="padding-top:0"><p>Ready-to-post 1080 x 1080 layouts for the F1R3FLY.IO feed: announcements, articles, quotes, events, stats and taglines, each in two or three background treatments. The PNG is the one to post. The SVG and PDF are the editable source for designers; headline type is outlined, so no fonts are needed. The text is placeholder copy: for a version with your own headline, ask Hannah.</p></div>',
-            '<section><div class="grid">', *cards, '</div></section></main></div></div>', FOOT.format(root=root, repo=REPO), '</body></html>']
-    open(os.path.join(dest, 'index.html'), 'w', encoding='utf-8').write('\n'.join(page))
-    return names
+        cards.append(dl_card('../social/templates/' + base, f'{label}: {variant}', 'dark', None, img='../social/templates/' + base + '.png', imgcls='post'))
+    open(os.path.join(dest, 'index.html'), 'w', encoding='utf-8').write(redirect_stub('../../logos/index.html#posts'))
+    return names, cards
 
 # ---------------------------------------------------------------- canva previews
 CANVA = [('01', 'logo-intro'), ('02', 'grey-to-navy'), ('03', 'teal'), ('04', 'magenta'), ('05', 'green'),
@@ -232,27 +278,27 @@ def home(dims):
     b = M['brands']
     def brand_card(key):
         br = b[key]; f = br['folder']
-        return f"""<div class="card linkcard"><a href="{f}/index.html"><div class="well"><img src="{f}/{br['card_img']}" alt="{html.escape(br['title'])} logo" style="max-height:90px;max-width:76%"></div></a>
+        return f"""<div class="card linkcard"><a href="logos/index.html#{ANCHOR[key]}"><div class="well"><img src="{f}/{br['card_img']}" alt="{html.escape(br['title'])} logo" style="max-height:90px;max-width:76%"></div></a>
 <div class="body"><h3>{html.escape(br['title'])}</h3><div class="desc">{html.escape(br['card_desc'])}</div>
-<div class="btns"><a class="btn primary" href="{f}/index.html">See all variants</a><a class="btn" href="{f}/{br['card_img'][:-4]}.zip" download>Download the main logo</a></div></div></div>"""
+<div class="btns"><a class="btn primary" href="logos/index.html#{ANCHOR[key]}">See all variants</a><a class="btn" href="{f}/{br['card_img'][:-4]}.zip" download>Download the main logo</a></div></div></div>"""
     nav = side_nav('')
     main = []
     main.append('<div class="intro" style="padding-top:0"><p>Pick a category, preview the file, and download it. Three brands live here: F1R3FLY Industries (the trefoil knot), F1R3FLY.IO (the firefly bug), and f1r3lang (the language, formerly Rholang). Below them, the product logos, starting with ign1t10n, the installer.</p></div>')
     # books
-    main.append(f"""<section id="books"><div class="section-head"><h2>Brand books</h2><span class="hint">The deep reference for each brand</span></div><div class="grid">
-<div class="card"><div class="well book"><img class="cover" src="books/ff.indust-brand-style-guide-cover.png" alt="F1R3FLY Industries Brand Style Guide cover"></div><div class="body"><h3>F1R3FLY Industries</h3><div class="meta">Brand Style Guide &middot; September 2026</div><div class="desc">The master-brand rulebook for the trefoil knot. Logo construction and clearspace, brand architecture, the layout grid, color, typography, and voice.</div><div class="btns"><a class="btn primary" href="books/ff.indust-brand-style-guide-2026-09.pdf" target="_blank" rel="noopener">Download PDF</a></div></div></div>
-<div class="card"><div class="well book"><img class="cover" src="books/ff.io-brand-guidebook-cover.png" alt="F1R3FLY.IO Brand Guidebook cover"></div><div class="body"><h3>F1R3FLY.IO</h3><div class="meta">Brand Guidebook &middot; September 2026</div><div class="desc">The developer-platform rulebook for the firefly bug. The same depth as the Industries guide, tuned for F1R3FLY.IO.</div><div class="btns"><a class="btn primary" href="books/ff.io-brand-guidebook-2026-09.pdf" target="_blank" rel="noopener">Download PDF</a></div></div></div>
+    main.append(f"""<section id="books" data-spy="books" data-title="Brand books"><div class="section-head"><h2>Brand books</h2><span class="hint">The deep reference for each brand</span></div><div class="grid">
+<div class="card"><div class="well book"><img class="cover" src="books/ff.indust-brand-style-guide-cover.png" alt="F1R3FLY Industries Brand Style Guide cover"></div><div class="body"><h3>F1R3FLY Industries</h3><div class="meta">Brand Style Guide &middot; September 2026</div><div class="desc">The master-brand rulebook for the trefoil knot. Logo construction and clearspace, brand architecture, the layout grid, color, typography, and voice.</div><div class="btns"><a class="btn primary" href="books/ff.indust-brand-style-guide-2026-09.pdf" download>Download PDF</a></div></div></div>
+<div class="card"><div class="well book"><img class="cover" src="books/ff.io-brand-guidebook-cover.png" alt="F1R3FLY.IO Brand Guidebook cover"></div><div class="body"><h3>F1R3FLY.IO</h3><div class="meta">Brand Guidebook &middot; September 2026</div><div class="desc">The developer-platform rulebook for the firefly bug. The same depth as the Industries guide, tuned for F1R3FLY.IO.</div><div class="btns"><a class="btn primary" href="books/ff.io-brand-guidebook-2026-09.pdf" download>Download PDF</a></div></div></div>
 </div></section>""")
-    main.append(f'<section id="logos"><div class="section-head"><h2>Primary logos</h2><span class="hint">Click a brand to see every variant on its own background</span></div><div class="grid">{brand_card("ff.io")}{brand_card("ff.indust")}{brand_card("flang")}</div></section>')
-    main.append(f'<section id="products"><div class="section-head"><h2>Product logos</h2><span class="hint">Marks for the things built on F1R3FLY</span></div><div class="grid">{brand_card("ign")}</div><p class="more">More coming</p></section>')
-    main.append("""<section id="system"><div class="section-head"><h2>Color, fonts and layout</h2><span class="hint">The system everything is built on</span></div><div class="grid">
-<div class="card"><div class="well" style="padding:0"><div class="swrow"><span style="background:#000;border-right:1px solid #0d3050"></span><span style="background:#fff"></span><span style="background:#f3d630"></span><span style="background:#3fa9f5"></span></div></div><div class="body"><h3>Colors</h3><div class="desc">Black <code>#000000</code>, White, Brand Yellow <code>#F3D630</code>, and Brand Sky <code>#3FA9F5</code>, with the signature gradient running yellow &rarr; sky. The PDF shows the full system; the swatch pack drops the palette into Illustrator, Photoshop, and Canva.</div><div class="btns"><a class="btn primary" href="system/ff-color-system-2026-06.pdf" target="_blank" rel="noopener">Color system (PDF)</a><a class="btn" href="system/ff-swatches.zip" download>Swatch pack (zip)</a></div></div></div>
+    main.append(f'<section id="logos" data-spy="logos" data-title="Primary logos"><div class="section-head"><h2>Primary logos</h2><span class="hint">Click a brand to see every variant on its own background</span></div><div class="grid">{brand_card("ff.io")}{brand_card("ff.indust")}{brand_card("flang")}</div></section>')
+    main.append(f'<section id="products" data-spy="products" data-title="Product logos"><div class="section-head"><h2>Product logos</h2><span class="hint">Marks for the things built on F1R3FLY</span></div><div class="grid">{brand_card("ign")}</div><p class="more">More coming</p></section>')
+    main.append("""<section id="system" data-spy="system" data-title="Color, fonts and layout"><div class="section-head"><h2>Color, fonts and layout</h2><span class="hint">The system everything is built on</span></div><div class="grid">
+<div class="card"><div class="well" style="padding:0"><div class="swrow"><span style="background:#000;border-right:1px solid #0d3050"></span><span style="background:#fff"></span><span style="background:#f3d630"></span><span style="background:#3fa9f5"></span></div></div><div class="body"><h3>Colors</h3><div class="desc">Black <code>#000000</code>, White, Brand Yellow <code>#F3D630</code>, and Brand Sky <code>#3FA9F5</code>, with the signature gradient running yellow &rarr; sky. The PDF shows the full system; the swatch pack drops the palette into Illustrator, Photoshop, and Canva.</div><div class="btns"><a class="btn primary" href="system/ff-color-system-2026-06.pdf" download>Color system (PDF)</a><a class="btn" href="system/ff-swatches.zip" download>Swatch pack (zip)</a></div></div></div>
 <div class="card"><div class="well" style="flex-direction:column;gap:7px;align-items:flex-start;padding:30px 32px"><span style="font-family:'League Spartan',sans-serif;font-weight:700;font-size:2rem;line-height:1">League Spartan</span><span style="font-family:var(--head);font-weight:700;font-size:.72rem;letter-spacing:.14em;color:var(--yellow)">HEADINGS &middot; UI</span><span style="font-size:1.08rem;color:var(--text-dim);margin-top:10px">Source Sans 3 &middot; body text</span></div><div class="body"><h3>Fonts</h3><div class="desc">League Spartan (Light, Regular, SemiBold, Bold) for headings and UI; Source Sans 3 for body text. Both free under the SIL Open Font License. Brandon Grotesque lives only inside the logo files; never typeset it yourself.</div><div class="btns"><a class="btn primary" href="fonts/ff-fonts.zip" download>Download fonts (zip)</a><a class="btn" href="https://fonts.google.com/specimen/League+Spartan" target="_blank" rel="noopener">Google Fonts</a></div></div></div>
 <div class="card"><div class="well"><img class="cover" src="system/ff-grid-preview.png" alt="F1R3FLY layout grid over a social post" style="max-height:184px;border:0;box-shadow:none"></div><div class="body"><h3>Layout grid</h3><div class="desc">The 6-column grid behind every F1R3FLY layout, the same one in the brand books. Drop it over your artboard to keep margins, columns, and baselines consistent.</div><div class="btns"><a class="btn" href="system/ff-grid.pdf" download>PDF</a><a class="btn" href="system/ff-grid.svg" download>SVG</a><a class="btn" href="system/ff-grid.png" download>PNG</a><a class="btn primary" href="system/ff-grid.zip" download>ALL (zip)</a></div></div></div>
 </div></section>""")
-    main.append(f"""<section id="social"><div class="section-head"><h2>Social media assets</h2><span class="hint">Profile pictures, post templates, and animated Canva templates</span></div><div class="grid">
-<div class="card linkcard"><a href="logos/ff.io/index.html#profile"><div class="well"><img src="logos/ff.io/ff.io-avatar-ring-color-onblack.svg" alt="F1R3FLY.IO profile picture, ring" class="round" style="max-height:140px"><img src="logos/ff.io/ff.io-avatar-square-color-onblack.svg" alt="F1R3FLY.IO profile picture, square" style="max-height:140px;border-radius:10px"></div></a><div class="body"><h3>F1R3FLY.IO profile pictures</h3><div class="meta">YouTube &middot; X &middot; Bluesky &middot; LinkedIn</div><div class="desc">The bug and wordmark in a thin ring for YouTube, X and Bluesky; the bug alone on black for LinkedIn. 2000 x 2000.</div><div class="btns"><a class="btn primary" href="logos/ff.io/ff.io-avatar-ring-color-onblack.zip" download>Ring (zip)</a><a class="btn" href="logos/ff.io/ff.io-avatar-square-color-onblack.zip" download>Square (zip)</a><a class="btn" href="logos/ff.io/index.html">All F1R3FLY.IO files</a></div></div></div>
-<div class="card linkcard"><a href="social/templates/index.html"><div class="well"><img class="shot" src="social/templates/ff.io-post-square-tagline-bold-brand-ellipse.png" alt="social template"><img class="shot" src="social/templates/ff.io-post-square-stat-gradient-dark-orb.png" alt="social template"></div></a><div class="body"><h3>Social post templates</h3><div class="desc">Sixteen ready-to-post 1080 squares: announcements, articles, quotes, events, stats and taglines. Grab the PNG to post now, or the SVG or PDF source to customize.</div><div class="btns"><a class="btn primary" href="social/templates/index.html">See all sixteen</a></div></div></div>
+    main.append(f"""<section id="social" data-spy="social" data-title="Social media assets"><div class="section-head"><h2>Social media assets</h2><span class="hint">Profile pictures, post templates, and animated Canva templates</span></div><div class="grid">
+<div class="card linkcard"><a href="logos/index.html#ff-io"><div class="well"><img src="logos/ff.io/ff.io-avatar-ring-color-onblack.svg" alt="F1R3FLY.IO profile picture, ring" class="round" style="max-height:140px"><img src="logos/ff.io/ff.io-avatar-square-color-onblack.svg" alt="F1R3FLY.IO profile picture, square" style="max-height:140px;border-radius:10px"></div></a><div class="body"><h3>F1R3FLY.IO profile pictures</h3><div class="meta">YouTube &middot; X &middot; Bluesky &middot; LinkedIn</div><div class="desc">The bug and wordmark in a thin ring for YouTube, X and Bluesky; the bug alone on black for LinkedIn. 2000 x 2000.</div><div class="btns"><a class="btn primary" href="logos/ff.io/ff.io-avatar-ring-color-onblack.zip" download>Ring (zip)</a><a class="btn" href="logos/ff.io/ff.io-avatar-square-color-onblack.zip" download>Square (zip)</a><a class="btn" href="logos/index.html#ff-io">All F1R3FLY.IO files</a></div></div></div>
+<div class="card linkcard"><a href="logos/index.html#posts"><div class="well"><img class="shot" src="social/templates/ff.io-post-square-tagline-bold-brand-ellipse.png" alt="social template"><img class="shot" src="social/templates/ff.io-post-square-stat-gradient-dark-orb.png" alt="social template"></div></a><div class="body"><h3>Social post templates</h3><div class="desc">Sixteen ready-to-post 1080 squares: announcements, articles, quotes, events, stats and taglines. Grab the PNG to post now, or the SVG or PDF source to customize.</div><div class="btns"><a class="btn primary" href="logos/index.html#posts">See all sixteen</a></div></div></div>
 <div class="card"><div class="well thumbs two">{video('01','logo-intro')}{video('01','logo-intro','portrait')}</div><div class="body"><h3>Logo intro</h3><div class="meta">Animated Canva template 01 &middot; Square and Portrait</div><div class="desc">The F1R3FLY.IO logo rises in, then the eyebrow, headline, and bullets. Open it in Canva for your own editable copy. Hover or tap a preview to play it.</div><div class="btns"><a class="btn primary" href="https://canva.link/8gpidz1itwsumvk" target="_blank" rel="noopener">Open in Canva: Square</a><a class="btn" href="https://canva.link/ni2jv95vgtj2fw3" target="_blank" rel="noopener">Portrait</a></div><div class="dl"><b>MP4:</b> <a href="social/canva/ff.io-canva-01-logo-intro-square.mp4" download>Square</a> &middot; <a href="social/canva/ff.io-canva-01-logo-intro-portrait.mp4" download>Portrait</a></div></div></div>
 <div class="card"><div class="well thumbs four">{video('02','grey-to-navy')}{video('03','teal')}{video('04','magenta')}{video('05','green')}</div><div class="body"><h3>Gradient backgrounds</h3><div class="meta">Animated Canva templates 02 to 05 &middot; Square and Portrait</div><div class="desc">The four website section colors behind the same text animation: grey to navy, teal, magenta, and green. All four come in one Canva file; keep the page you need.</div><div class="btns"><a class="btn primary" href="https://canva.link/faibjulz5u3rop1" target="_blank" rel="noopener">Open in Canva: Square</a><a class="btn" href="https://canva.link/7pooqvi22t905u9" target="_blank" rel="noopener">Portrait</a></div><div class="dl"><b>MP4, square:</b> <a href="social/canva/ff.io-canva-02-grey-to-navy-square.mp4" download>02</a> &middot; <a href="social/canva/ff.io-canva-03-teal-square.mp4" download>03</a> &middot; <a href="social/canva/ff.io-canva-04-magenta-square.mp4" download>04</a> &middot; <a href="social/canva/ff.io-canva-05-green-square.mp4" download>05</a></div></div></div>
 <div class="card"><div class="well thumbs five">{video('06','panel-loop-grey-to-navy')}{video('07','panel-loop-teal')}{video('08','panel-loop-magenta')}{video('09','firefly-panel-straight')}{video('10','firefly-panel-curved')}</div><div class="body"><h3>Panel loops</h3><div class="meta">Animated Canva templates 06 to 10 &middot; Square</div><div class="desc">A looping video panel beside the text: three gradient loops and two firefly loops.</div><!--CANVA-06-10--><div class="dl"><b>MP4, square:</b> <a href="social/canva/ff.io-canva-06-panel-loop-grey-to-navy-square.mp4" download>06</a> &middot; <a href="social/canva/ff.io-canva-07-panel-loop-teal-square.mp4" download>07</a> &middot; <a href="social/canva/ff.io-canva-08-panel-loop-magenta-square.mp4" download>08</a> &middot; <a href="social/canva/ff.io-canva-09-firefly-panel-straight-square.mp4" download>09</a> &middot; <a href="social/canva/ff.io-canva-10-firefly-panel-curved-square.mp4" download>10</a></div></div></div>
@@ -260,7 +306,7 @@ def home(dims):
     page = [HEAD.format(title=SITE, css=CSS, root=''),
             f'<header class="hero" style="padding-top:60px"><div class="wrap"><div class="eyebrow">Brand assets &amp; guidelines</div><div class="hero-row" style="margin-top:12px"><h1>F1R3FLY Brand Portal</h1><div class="last-update">Last update: {UPDATE}</div></div></div></header><div class="wrap"><hr class="grad-rule"></div>',
             f'<div class="wrap" style="padding-top:30px"><div class="layout">{nav}<main>{"".join(main)}</main></div></div>',
-            FOOT.format(root='', repo=REPO),
+            FOOT.format(root='', repo=REPO) + SCROLLSPY,
             """<script>document.querySelectorAll('.well.thumbs video').forEach(function(v){var p=function(){try{v.play()}catch(e){}};v.addEventListener('mouseenter',p);v.addEventListener('mouseleave',function(){v.pause()});v.addEventListener('click',function(){v.paused?p():v.pause()})});</script></body></html>"""]
     return '\n'.join(page)
 
@@ -366,8 +412,12 @@ def main():
         for s in br['sections']:
             for a in s['assets']:
                 dims[a['new']] = brand_asset(br, a, dest); rename_map.append((a['old'] or '(new)', a['new']))
-        open(os.path.join(dest, 'index.html'), 'w', encoding='utf-8').write(brand_page(br, dims)); print('brand', key)
-    rename_map += build_posts(ensure(os.path.join(OUT, 'social/templates'))); print('posts')
+        print('brand', key)
+    names, post_cards = build_posts(ensure(os.path.join(OUT, 'social/templates'))); rename_map += names; print('posts')
+    open(os.path.join(OUT, 'logos/index.html'), 'w', encoding='utf-8').write(assets_page(dims, post_cards))
+    for key, br in M['brands'].items():
+        depth = br['folder'].count('/') + 1
+        open(os.path.join(OUT, br['folder'], 'index.html'), 'w', encoding='utf-8').write(redirect_stub('../' * depth + 'logos/index.html#' + ANCHOR[key]))
     rename_map += build_canva(ensure(os.path.join(OUT, 'social/canva'))); print('canva')
     # books
     cp(os.path.join(OLD, 'F1R3FLY INDUSTRIES-Brand Style Guide.pdf'), os.path.join(OUT, 'books/ff.indust-brand-style-guide-2026-09.pdf'))
