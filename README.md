@@ -15,7 +15,7 @@ Last update: November 6, 2026. Reorganised 2026-11-06: new folder layout, new fi
 | **[f1r3lang →](logos/flang/)** | `logos/flang/` | 8 variants |
 | **[ign1t10n →](products/ign/)** | `products/ign/` | 7 variants |
 
-- `books/` the two brand books (PDF) and their cover images
+- `books/` the two brand books (PDF, November 6, 2026 editions, both titled Brand Book) and their cover images
 - `system/` color system PDF, swatch pack, layout grid
 - `fonts/` League Spartan and Source Sans 3 (SIL OFL), plus `ff-fonts.zip`
 - `social/templates/` sixteen 1080 x 1080 post templates, [preview page](social/templates/)
@@ -132,8 +132,8 @@ Raw file base for scripts and AI tools: `https://raw.githubusercontent.com/hanna
 - `f1r3fly-io-template-09-firefly-panel-straight-square-thumb.png` → `ff.io-canva-09-firefly-panel-straight-square-thumb.png`
 - `f1r3fly-io-template-10-firefly-panel-curved-square.mp4` → `ff.io-canva-10-firefly-panel-curved-square.mp4`
 - `f1r3fly-io-template-10-firefly-panel-curved-square-thumb.png` → `ff.io-canva-10-firefly-panel-curved-square-thumb.png`
-- `F1R3FLY INDUSTRIES-Brand Style Guide.pdf` → `books/ff.indust-brand-style-guide-2026-09.pdf`
-- `F1R3FLY.IO-Brand Guidebook.pdf` → `books/ff.io-brand-guidebook-2026-09.pdf`
+- `F1R3FLY INDUSTRIES-Brand Style Guide.pdf` → `books/ff.indust-brand-book-2026-11.pdf` (re-issued November 6, 2026 as the F1R3FLY Industries Brand Book)
+- `F1R3FLY.IO-Brand Guidebook.pdf` → `books/ff.io-brand-book-2026-11.pdf` (re-issued November 6, 2026 as the F1R3FLY.IO Brand Book)
 - `f1r3fly-brand-color-system-06.12.2026.pdf` → `system/ff-color-system-2026-06.pdf`
 - `swatches/f1r3fly-brand-swatches.zip` → `system/ff-swatches.zip`
 - `templates/f1r3fly-brand-grid.*` → `system/ff-grid.*`

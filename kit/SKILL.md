@@ -1,7 +1,7 @@
 ---
 name: f1r3fly-brand-kit
 description: "Self-contained F1R3FLY brand system for producing on-brand deliverables — social media graphics, PDFs, presentations, documents, HTML pages, templates, and layouts. Use this whenever creating ANYTHING branded for F1R3FLY Industries or F1R3FLY.IO, or when the user references F1R3FLY colors, fonts, or logos. Contains the exact color values (June 12 2026 system), typography rules, logo fetch URLs, layout specs, and brand voice so any AI can produce brand-accurate output on the first try. Triggers on requests like 'make a F1R3FLY social post', 'F1R3FLY PDF / slide deck / one-pager', 'apply F1R3FLY branding', 'use the F1R3FLY brand rules', or 'make this look like F1R3FLY'."
-version: "1.4"
+version: "1.5"
 updated: "2026-11-06"
 ---
 
@@ -69,8 +69,8 @@ Everything an AI or a teammate needs to pull real assets and check their work.
 - Raw fetch base (for AI / programmatic download): `https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/`
 
 **Brand books** (deeper reference — Section 9; September 23, 2026 editions)
-- F1R3FLY Industries — Brand Style Guide (PDF): https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/books/ff.indust-brand-style-guide-2026-09.pdf
-- F1R3FLY.IO — Brand Guidebook (PDF): https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/books/ff.io-brand-guidebook-2026-09.pdf
+- F1R3FLY Industries — Brand Book (PDF): https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/books/ff.indust-brand-book-2026-11.pdf
+- F1R3FLY.IO — Brand Book (PDF): https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/books/ff.io-brand-book-2026-11.pdf
 
 **Check your work**
 - Contrast checker (WCAG AA/AAA): https://webaim.org/resources/contrastchecker/
@@ -387,8 +387,8 @@ When making icons for a deliverable: use the brand gradient (Yellow → Sky) or 
 
 For anything not covered here (detailed logo geometry, clearspace diagrams, brand architecture, philosophy), see the published brand books (links in Links and resources):
 
-- **F1R3FLY INDUSTRIES — Brand Style Guide** (September 23, 2026 edition) — trefoil-knot master brand.
-- **F1R3FLY.IO — Brand Guidebook** (September 23, 2026 edition) — firefly-bug developer platform.
+- **F1R3FLY INDUSTRIES — Brand Book** (November 6, 2026 edition, 20 pages) — trefoil-knot master brand.
+- **F1R3FLY.IO — Brand Book** (November 6, 2026 edition, 22 pages) — firefly-bug developer platform.
 
 Both books are current: League Spartan headings, Source Sans 3 body, the June 12 color system. Use them for logo geometry, clearspace diagrams, brand architecture and philosophy. If a book and this skill ever disagree, this skill wins, and say so.
 
@@ -431,7 +431,7 @@ Rule: lighten, darken, or shift saturation, but keep the hue constant. Each row 
 
 | Field | Value |
 |-------|-------|
-| Kit version | 1.4 (November 6, 2026) — portal reorganised: new folders (`logos/<brand>/`), new file names (`ff.io-logo-wide-color-transp-dark`), preview page per brand, JPG added. 1.3 (October 9, 2026) — grid rules in place of the grid file, body weight 400, current brand books, f1r3lang, app and menu-bar icons |
+| Kit version | 1.5 (November 6, 2026) — brand books re-issued as the November 6 Brand Book editions (new file names, Downloads page, live links). 1.4 (November 6, 2026) — portal reorganised: new folders (`logos/<brand>/`), new file names (`ff.io-logo-wide-color-transp-dark`), preview page per brand, JPG added. 1.3 (October 9, 2026) — grid rules in place of the grid file, body weight 400, current brand books, f1r3lang, app and menu-bar icons |
 | Color authority | f1r3fly-brand-color-system-06.12.2026 (sage retired June 10; black = #000000) |
 | Type / logo / layout source | F1R3FLY brand books (September 23, 2026 editions) + F1R3FLY brand system |
 | Maintainer | Hannah Adams, Creative Director, F1R3FLY |

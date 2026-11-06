@@ -286,8 +286,8 @@ def home(dims):
     main.append('<div class="intro" style="padding-top:0"><p>Pick a category, preview the file, and download it. Three brands live here: F1R3FLY Industries (the trefoil knot), F1R3FLY.IO (the firefly bug), and f1r3lang (the language, formerly Rholang). Below them, the product logos, starting with ign1t10n, the installer.</p></div>')
     # books
     main.append(f"""<section id="books" data-spy="books" data-title="Brand books"><div class="section-head"><h2>Brand books</h2><span class="hint">The deep reference for each brand</span></div><div class="grid">
-<div class="card"><div class="well book"><img class="cover" src="books/ff.indust-brand-style-guide-cover.png" alt="F1R3FLY Industries Brand Style Guide cover"></div><div class="body"><h3>F1R3FLY Industries</h3><div class="meta">Brand Style Guide &middot; September 2026</div><div class="desc">The master-brand rulebook for the trefoil knot. Logo construction and clearspace, brand architecture, the layout grid, color, typography, and voice.</div><div class="btns"><a class="btn primary" href="books/ff.indust-brand-style-guide-2026-09.pdf" download>Download PDF</a></div></div></div>
-<div class="card"><div class="well book"><img class="cover" src="books/ff.io-brand-guidebook-cover.png" alt="F1R3FLY.IO Brand Guidebook cover"></div><div class="body"><h3>F1R3FLY.IO</h3><div class="meta">Brand Guidebook &middot; September 2026</div><div class="desc">The developer-platform rulebook for the firefly bug. The same depth as the Industries guide, tuned for F1R3FLY.IO.</div><div class="btns"><a class="btn primary" href="books/ff.io-brand-guidebook-2026-09.pdf" download>Download PDF</a></div></div></div>
+<div class="card"><div class="well book"><img class="cover" src="books/ff.indust-brand-book-cover.png" alt="F1R3FLY Industries Brand Book cover"></div><div class="body"><h3>F1R3FLY Industries</h3><div class="meta">Brand Book &middot; November 6, 2026 &middot; 20 pages</div><div class="desc">The master-brand rulebook for the trefoil knot. Logo construction and clear space, brand architecture, the layout grid, color, typography, accessibility, and a Downloads page that links back here.</div><div class="btns"><a class="btn primary" href="books/ff.indust-brand-book-2026-11.pdf" download>Download PDF</a></div></div></div>
+<div class="card"><div class="well book"><img class="cover" src="books/ff.io-brand-book-cover.png" alt="F1R3FLY.IO Brand Book cover"></div><div class="body"><h3>F1R3FLY.IO</h3><div class="meta">Brand Book &middot; November 6, 2026 &middot; 22 pages</div><div class="desc">The developer-platform rulebook for the firefly bug. The same depth as the Industries book, tuned for F1R3FLY.IO.</div><div class="btns"><a class="btn primary" href="books/ff.io-brand-book-2026-11.pdf" download>Download PDF</a></div></div></div>
 </div></section>""")
     main.append(f'<section id="logos" data-spy="logos" data-title="Primary logos"><div class="section-head"><h2>Primary logos</h2><span class="hint">Click a brand to see every variant on its own background</span></div><div class="grid">{brand_card("ff.io")}{brand_card("ff.indust")}{brand_card("flang")}</div></section>')
     main.append(f'<section id="products" data-spy="products" data-title="Product logos"><div class="section-head"><h2>Product logos</h2><span class="hint">Marks for the things built on F1R3FLY</span></div><div class="grid">{brand_card("ign")}</div><p class="more">More coming</p></section>')
@@ -371,8 +371,8 @@ def update_skill(text):
     text = text.replace('version: "1.3"', 'version: "1.4"').replace('updated: "2026-10-09"', 'updated: "2026-11-06"')
     text = text.replace('https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1R3FLY-Industries-Brand-Assets', LIVE + 'logos/ff.indust/')
     text = text.replace('https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1R3FLY-IO-Brand-Assets', LIVE + 'logos/ff.io/')
-    text = text.replace('https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/blob/main/F1R3FLY%20INDUSTRIES-Brand%20Style%20Guide.pdf', RAW + 'books/ff.indust-brand-style-guide-2026-09.pdf')
-    text = text.replace('https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/blob/main/F1R3FLY.IO-Brand%20Guidebook.pdf', RAW + 'books/ff.io-brand-guidebook-2026-09.pdf')
+    text = text.replace('https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/blob/main/F1R3FLY%20INDUSTRIES-Brand%20Style%20Guide.pdf', RAW + 'books/ff.indust-brand-book-2026-11.pdf')
+    text = text.replace('https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/blob/main/F1R3FLY.IO-Brand%20Guidebook.pdf', RAW + 'books/ff.io-brand-book-2026-11.pdf')
     tree = """```
 f1r3fly-brand-portal/
 ├── logos/ff.indust/   # F1R3FLY Industries, the trefoil knot (parent brand)
@@ -420,11 +420,11 @@ def main():
         open(os.path.join(OUT, br['folder'], 'index.html'), 'w', encoding='utf-8').write(redirect_stub('../' * depth + 'logos/index.html#' + ANCHOR[key]))
     rename_map += build_canva(ensure(os.path.join(OUT, 'social/canva'))); print('canva')
     # books
-    cp(os.path.join(OLD, 'F1R3FLY INDUSTRIES-Brand Style Guide.pdf'), os.path.join(OUT, 'books/ff.indust-brand-style-guide-2026-09.pdf'))
-    cp(os.path.join(OLD, 'F1R3FLY.IO-Brand Guidebook.pdf'), os.path.join(OUT, 'books/ff.io-brand-guidebook-2026-09.pdf'))
-    cp(os.path.join(OLD, 'book-covers/industries-style-guide-cover.png'), os.path.join(OUT, 'books/ff.indust-brand-style-guide-cover.png'))
-    cp(os.path.join(OLD, 'book-covers/io-guidebook-cover.png'), os.path.join(OUT, 'books/ff.io-brand-guidebook-cover.png'))
-    rename_map += [('F1R3FLY INDUSTRIES-Brand Style Guide.pdf', 'books/ff.indust-brand-style-guide-2026-09.pdf'), ('F1R3FLY.IO-Brand Guidebook.pdf', 'books/ff.io-brand-guidebook-2026-09.pdf')]
+    cp(os.path.join(OLD, 'F1R3FLY INDUSTRIES-Brand Style Guide.pdf'), os.path.join(OUT, 'books/ff.indust-brand-book-2026-11.pdf'))
+    cp(os.path.join(OLD, 'F1R3FLY.IO-Brand Guidebook.pdf'), os.path.join(OUT, 'books/ff.io-brand-book-2026-11.pdf'))
+    cp(os.path.join(OLD, 'book-covers/industries-style-guide-cover.png'), os.path.join(OUT, 'books/ff.indust-brand-book-cover.png'))
+    cp(os.path.join(OLD, 'book-covers/io-guidebook-cover.png'), os.path.join(OUT, 'books/ff.io-brand-book-cover.png'))
+    rename_map += [('F1R3FLY INDUSTRIES-Brand Style Guide.pdf', 'books/ff.indust-brand-book-2026-11.pdf'), ('F1R3FLY.IO-Brand Guidebook.pdf', 'books/ff.io-brand-book-2026-11.pdf')]
     # system
     cp(os.path.join(OLD, 'F1R3FLY-Industries-Brand-Assets/f1r3fly-brand-color-system-06.12.2026.pdf'), os.path.join(OUT, 'system/ff-color-system-2026-06.pdf'))
     cp(os.path.join(OLD, 'swatches/f1r3fly-brand-swatches.zip'), os.path.join(OUT, 'system/ff-swatches.zip'))
