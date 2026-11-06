@@ -1,574 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>F1R3FLY Brand Portal</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet" />
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>F1R3FLY Brand Portal</title><link rel="icon" href="logos/ff.io/ff.io-icon-bug-color-transp.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --black: #000000;
-    --panel: #001626;          /* Hue Darkest — box background */
-    --panel-edge: #0d3050;
-    --well: #000000;           /* preview wells, so color-on-dark logos read */
-    --white: #ffffff;
-    --yellow: #f3d630;
-    --sky: #3fa9f5;
-    --text: #f2f2f2;           /* body text — light */
-    --text-dim: #d2dae0;       /* secondary text — still light */
-    --sig-gradient: linear-gradient(to right, #f3d630, #3fa9f5);   /* signature accent */
-    --btn-gradient: linear-gradient(to right, #00528c, #009188);   /* dark blue → teal, for buttons */
-    --font: "Source Sans 3", sans-serif;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--black);
-    color: var(--text);
-    font-family: var(--font);
-    font-weight: 400;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-  a { color: inherit; text-decoration: none; }
-
-  /* flush-left container, wide on big screens, responsive padding */
-  .wrap { width: 100%; max-width: 1700px; margin: 0; padding: 0 clamp(26px, 4vw, 68px); }
-
-  .eyebrow {
-    font-family: var(--font); font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.16em; font-size: 0.78rem;
-    color: transparent; background: var(--sig-gradient);
-    -webkit-background-clip: text; background-clip: text; width: max-content;
-  }
-  .grad-rule { height: 1px; background: var(--sig-gradient); border: 0; width: 100%; }
-
-  /* ---------- HERO (matches the PS mockup: title left, last-update right) ---------- */
-  header.hero { padding: 80px 0 26px; }
-  .hero-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-top: 14px; }
-  .hero h1 {
-    font-family: var(--font); font-weight: 700; text-transform: uppercase;
-    font-size: clamp(2.3rem, 5.4vw, 4rem); line-height: 1.02; letter-spacing: 0.005em;
-  }
-  .last-update {
-    font-family: var(--font); font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.1em; font-size: clamp(0.9rem, 1.3vw, 1.18rem); color: var(--text);
-    white-space: nowrap;
-  }
-  .intro { padding: 22px 0 6px; }
-  .intro p { font-size: 1.14rem; color: var(--text-dim); max-width: 46em; }
-
-  /* ---------- SECTIONS ---------- */
-  section { padding: 30px 0; }
-  .section-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
-  .section-head h2 { font-family: var(--font); font-weight: 700; font-size: 1.55rem; letter-spacing: 0.005em; }
-  .section-head .hint { color: var(--text-dim); font-size: 0.98rem; }
-
-  /* responsive card grid: 1-up on phones, more per row as the screen grows */
-  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 20px; }
-
-  .card {
-    background: var(--panel);
-    border: 1px solid var(--panel-edge);
-    border-radius: 16px; overflow: hidden;
-    display: flex; flex-direction: column;
-    transition: border-color 0.2s ease, transform 0.2s ease;
-  }
-  .card:hover { border-color: var(--sky); transform: translateY(-2px); }
-  .card .well {
-    background: var(--well);
-    min-height: 188px; padding: 26px;
-    display: flex; align-items: center; justify-content: center; gap: 26px;
-    border-bottom: 1px solid var(--panel-edge);
-  }
-  /* brand-book covers: bigger + outlined */
-  .card .well.book { min-height: 300px; }
-  .card .well.book img.cover { max-height: 248px; max-width: 100%; border: 1px solid #4a5862; border-radius: 4px; box-shadow: 0 8px 30px rgba(0,0,0,0.55); }
-  .card .well img.logo { max-height: 80px; max-width: 70%; }
-  .card .well img.icon { max-height: 70px; max-width: 36%; }
-  .card .well img.cover { max-height: 184px; max-width: 100%; border-radius: 4px; }
-  .card .well img.shot { max-height: 168px; max-width: 46%; border-radius: 6px; }
-  .card .body { padding: 24px 24px 26px; display: flex; flex-direction: column; gap: 13px; flex-grow: 1; }
-  .card .body h3 { font-family: var(--font); font-weight: 700; font-size: 1.3rem; }
-  .card .body .meta { font-family: var(--font); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.68rem; color: var(--yellow); margin-top: -6px; }
-  .card .body .desc { font-size: 0.99rem; color: var(--text-dim); }
-  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; padding-top: 8px; }
-  .btn {
-    font-family: var(--font); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.01em;
-    padding: 11px 18px; border-radius: 9px; border: 1px solid #20486b; color: var(--white);
-    transition: all 0.18s ease; cursor: pointer; display: inline-block;
-  }
-  .btn:hover { border-color: var(--sky); color: var(--sky); }
-  .btn.primary { background: var(--btn-gradient); color: #fff; border: 0; text-shadow: 0 1px 2px rgba(0,0,0,0.35); }
-  .btn.primary:hover { color: #fff; filter: brightness(1.1); }
-
-  /* swatch preview row */
-  .swrow { display: flex; gap: 0; width: 100%; height: 188px; }
-  .swrow span { flex: 1; }
-
-  /* ---------- SOCIAL MEDIA: avatars + animated Canva templates ---------- */
-  .card .well.thumbs { gap: 10px; padding: 18px; flex-wrap: wrap; }
-  .card .well.thumbs video, .card .well.thumbs img.thumb { border-radius: 6px; background: #000; display: block; object-fit: cover; }
-  .card .well.thumbs.one video { width: auto; max-height: 230px; max-width: 100%; }
-  .card .well.thumbs.two video { width: calc(50% - 5px); }
-  .card .well.thumbs.four video, .card .well.thumbs.five video { width: calc(25% - 8px); }
-  .card .well.thumbs.five video { width: calc(33.333% - 7px); }
-  .card .well img.avatar { width: 40%; max-width: 150px; border-radius: 50%; }
-  .card .well img.avatar.sq { border-radius: 10px; }
-  .dl-row { font-size: 0.92rem; color: var(--text-dim); line-height: 1.8; }
-  .dl-row b { color: var(--white); font-weight: 700; }
-  .dl-row a { color: var(--sky); font-weight: 600; }
-  .dl-row a:hover { text-decoration: underline; }
-  .section-note { margin-top: 18px; font-size: 0.97rem; color: var(--text-dim); max-width: 60em; line-height: 1.7; }
-  .section-note b { color: var(--white); }
-  .section-note a { color: var(--sky); font-weight: 600; }
-
-  /* ---------- BRAND KIT + QUICK GUIDE (side by side) ---------- */
-  .help-grid { display: grid; grid-template-columns: minmax(300px, 360px) 1fr; gap: 20px; align-items: start; }
-  .cheat-panel { background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 16px; padding: 26px 28px 28px; }
-  .cheat-panel h3 { font-family: var(--font); font-weight: 700; font-size: 1.3rem; margin-bottom: 6px; }
-  .cheat-panel .lead { color: var(--text-dim); font-size: 1rem; margin-bottom: 16px; }
-  .cheat { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 1rem; min-width: 460px; }
-  th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid #0a2236; vertical-align: top; }
-  th { font-family: var(--font); font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; font-size: 0.74rem; color: var(--yellow); }
-  tr:last-child td { border-bottom: 0; }
-  td code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.86rem; color: var(--sky); background: #00253f; padding: 2px 7px; border-radius: 5px; }
-  td.need { color: var(--white); }
-  .filehelp { margin-top: 16px; font-size: 0.97rem; color: var(--text-dim); line-height: 1.7; }
-  .filehelp b { color: var(--white); font-weight: 700; }
-  @media (max-width: 860px) { .help-grid { grid-template-columns: 1fr; } }
-
-  /* ---------- FOOTER ---------- */
-  footer { margin-top: 34px; padding: 38px 0 64px; border-top: 1px solid #0a2236; }
-  footer .frow { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
-  footer p { font-family: var(--font); font-weight: 400; font-size: 0.84rem; color: var(--text-dim); letter-spacing: 0.02em; }
-  footer a.repo { color: var(--sky); font-weight: 600; }
-</style>
-</head>
-<body>
-
-<header class="hero">
-  <div class="wrap">
-    <div class="eyebrow">Brand assets &amp; guidelines</div>
-    <div class="hero-row">
-      <h1>F1R3FLY Brand Portal</h1>
-      <div class="last-update">Last update: October 20, 2026</div>
-    </div>
-  </div>
-</header>
-
-<div class="wrap"><hr class="grad-rule" /></div>
-
-<div class="intro">
-  <div class="wrap">
-    <p>Pick a category, preview the file, and download it. Three brands live here: F1R3FLY Industries (the trefoil knot), F1R3FLY.IO (the firefly bug), and f1r3lang (the language, formerly Rholang). Below the logos are the product marks for F1R3Gaze, the browser, and ign1t10n, its installer.</p>
-  </div>
-</div>
-
-<!-- BRAND BOOKS -->
-<section id="books">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Brand books</h2>
-      <span class="hint">The deep reference for each brand</span>
-    </div>
-    <div class="card-grid">
-
-      <div class="card">
-        <div class="well book"><img class="cover" src="book-covers/industries-style-guide-cover.png" alt="F1R3FLY Industries Brand Style Guide cover" /></div>
-        <div class="body">
-          <h3>F1R3FLY Industries</h3>
-          <div class="meta">Brand Style Guide · September 2026</div>
-          <div class="desc">The master-brand rulebook for the trefoil knot. Logo construction and clearspace, brand architecture, the layout grid, color, typography, and voice: everything that defines the parent brand.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY%20INDUSTRIES-Brand%20Style%20Guide.pdf">Download PDF</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="well book"><img class="cover" src="book-covers/io-guidebook-cover.png" alt="F1R3FLY.IO Brand Guidebook cover" /></div>
-        <div class="body">
-          <h3>F1R3FLY.IO</h3>
-          <div class="meta">Brand Guidebook · September 2026</div>
-          <div class="desc">The developer-platform rulebook for the firefly bug. The same depth as the Industries guide (logo usage, clearspace, grid, color, type, and voice), tuned for F1R3FLY.IO.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY.IO-Brand%20Guidebook.pdf">Download PDF</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="well book"><img class="logo" style="max-height:120px; max-width:78%;" src="F1r3lang-Brand-Assets/f1r3lang-logo-color-on-dark.svg" alt="f1r3lang logo" /></div>
-        <div class="body">
-          <h3>f1r3lang</h3>
-          <div class="meta">Brand Assets &middot; September 2026</div>
-          <div class="desc">The language brand, formerly Rholang. The f1r3lang wordmark in color (for dark and light backgrounds), white, and black, transparent or on a solid background. Each variant zips together its SVG &middot; PNG &middot; PDF.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1r3lang-Brand-Assets/f1r3lang-logo-color-on-dark.zip">Download logo</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1r3lang-Brand-Assets">Browse all f1r3lang files</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- LOGOS -->
-<section id="logos">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Logos</h2>
-      <span class="hint">Full lockups and standalone icons</span>
-    </div>
-    <div class="card-grid">
-
-      <div class="card">
-        <div class="well"><img class="logo" src="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-IO-Brand-Assets/f1r3fly-io-horizontal-logo-color-on-dark.svg" alt="F1R3FLY.IO logo" /></div>
-        <div class="body">
-          <h3>F1R3FLY.IO logo</h3>
-          <div class="desc">The full developer-platform lockup: bug plus wordmark. Horizontal and vertical, in color-on-dark, white, white-background, and BW. SVG · PNG · PDF.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-IO-Brand-Assets/f1r3fly-io-horizontal-logo-color-on-dark.zip">Download logo</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1R3FLY-IO-Brand-Assets">Browse all .IO files</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="well"><img class="icon" src="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-IO-Brand-Assets/f1r3fly-io-bug-icon-color-on-dark.svg" alt="F1R3FLY.IO bug icon" /></div>
-        <div class="body">
-          <h3>F1R3FLY.IO bug icon</h3>
-          <div class="desc">The firefly bug on its own, for avatars, favicons, and app icons. It&rsquo;s a badge, not a substitute for the full logo on covers or public pieces.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-IO-Brand-Assets/f1r3fly-io-bug-icon-color-on-dark.zip">Download icon</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1R3FLY-IO-Brand-Assets">Browse icons</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="well"><img class="logo" src="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-Industries-Brand-Assets/f1r3fly-industries-horizontal-logo-color-on-dark.svg" alt="F1R3FLY Industries logo" /></div>
-        <div class="body">
-          <h3>F1R3FLY Industries logo</h3>
-          <div class="desc">The full parent-brand lockup: knot plus wordmark. Horizontal, vertical, and circle, in color-on-dark, color-on-light, bw-on-light, and white. SVG · PNG · PDF.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-Industries-Brand-Assets/f1r3fly-industries-horizontal-logo-color-on-dark.zip">Download logo</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1R3FLY-Industries-Brand-Assets">Browse all Industries files</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="well"><img class="icon" src="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-Industries-Brand-Assets/f1r3fly-industries-knot-icon-color-on-dark.svg" alt="F1R3FLY Industries knot icon" /></div>
-        <div class="body">
-          <h3>F1R3FLY Industries knot icon</h3>
-          <div class="desc">The trefoil knot on its own, for avatars, favicons, and app icons. Use the full logo on covers and anywhere public-facing.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-Industries-Brand-Assets/f1r3fly-industries-knot-icon-color-on-dark.zip">Download icon</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1R3FLY-Industries-Brand-Assets">Browse icons</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- PRODUCT MARKS: F1R3Gaze (browser) + ign1t10n (installer) -->
-<section id="products">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Product marks</h2>
-      <span class="hint">F1R3Gaze, the browser, and ign1t10n, its installer</span>
-    </div>
-    <div class="card-grid">
-
-      <div class="card">
-        <div class="well"><img class="logo" src="F1R3Gaze-Brand-Assets/f1r3gaze-horizontal-logo-color-on-dark.svg" alt="F1R3Gaze logo" /></div>
-        <div class="body">
-          <h3>F1R3Gaze logo</h3>
-          <div class="meta">Draft &middot; pending sign-off</div>
-          <div class="desc">The browser&rsquo;s eye and wordmark, built to the F1R3FLY.IO lockup rules in League Spartan. Horizontal and vertical, in color on dark, white, and black. SVG &middot; PNG &middot; PDF.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3Gaze-Brand-Assets/f1r3gaze-horizontal-logo-color-on-dark.zip">Download logo</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1R3Gaze-Brand-Assets">Browse all F1R3Gaze files</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="well"><img class="icon" style="max-height:130px; max-width:46%;" src="F1R3Gaze-Brand-Assets/f1r3gaze-app-icon.svg" alt="F1R3Gaze app icon" /></div>
-        <div class="body">
-          <h3>F1R3Gaze app icon</h3>
-          <div class="meta">The browser</div>
-          <div class="desc">The eye with its flame highlight on the black app tile, for the Dock, the taskbar, and anywhere the browser needs an icon. 1024 &times; 1024. SVG &middot; PNG &middot; PDF.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3Gaze-Brand-Assets/f1r3gaze-app-icon.zip">Download icon</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1R3Gaze-Brand-Assets">Browse icons</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="well"><img class="logo" src="ign1t10n-Brand-Assets/ign1t10n-horizontal-logo-color-on-dark.svg" alt="ign1t10n logo" /></div>
-        <div class="body">
-          <h3>ign1t10n logo</h3>
-          <div class="meta">Draft &middot; pending sign-off</div>
-          <div class="desc">The installer&rsquo;s on-button and wordmark, set to the same rules as F1R3Gaze. Horizontal and vertical, in color on dark, white, and black. SVG &middot; PNG &middot; PDF.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/ign1t10n-Brand-Assets/ign1t10n-horizontal-logo-color-on-dark.zip">Download logo</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/ign1t10n-Brand-Assets">Browse all ign1t10n files</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="well"><img class="icon" style="max-height:130px; max-width:46%;" src="ign1t10n-Brand-Assets/ign1t10n-app-icon.svg" alt="ign1t10n app icon" /></div>
-        <div class="body">
-          <h3>ign1t10n app icon</h3>
-          <div class="meta">The installer</div>
-          <div class="desc">The on-button (a ring, a stem, and a flame) on the black app tile. It installs F1R3Gaze and runs the local shard. 1024 &times; 1024. SVG &middot; PNG &middot; PDF.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/ign1t10n-Brand-Assets/ign1t10n-app-icon.zip">Download icon</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/ign1t10n-Brand-Assets">Browse icons</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- COLOR & TYPE -->
-<section id="system">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Color &amp; type</h2>
-      <span class="hint">The system everything is built on</span>
-    </div>
-    <div class="card-grid">
-
-      <div class="card">
-        <div class="well" style="padding:0">
-          <div class="swrow">
-            <span style="background:#000;border-right:1px solid #0d3050"></span>
-            <span style="background:#fff"></span>
-            <span style="background:#f3d630"></span>
-            <span style="background:#3fa9f5"></span>
-          </div>
-        </div>
-        <div class="body">
-          <h3>Colors</h3>
-          <div class="desc">Black <code style="color:var(--text-dim)">#000000</code>, White, Brand Yellow <code>#F3D630</code>, and Brand Sky <code>#3FA9F5</code>, with the signature gradient running yellow&nbsp;&rarr;&nbsp;sky. The PDF shows the full system; the swatch pack drops the palette straight into Illustrator, Photoshop, and Canva.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="F1R3FLY-Industries-Brand-Assets/f1r3fly-brand-color-system-06.12.2026.pdf">Color system (PDF)</a>
-            <a class="btn" target="_blank" rel="noopener" href="swatches/f1r3fly-brand-swatches.zip">Swatch pack (.zip)</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="well" style="flex-direction:column;gap:7px;align-items:flex-start;padding:30px 32px">
-          <span style="font-family:'League Spartan',sans-serif;font-weight:700;font-size:2rem;line-height:1">League Spartan</span>
-          <span style="font-family:var(--font);font-weight:700;font-size:0.72rem;letter-spacing:0.14em;color:var(--yellow)">HEADINGS · UI</span>
-          <span style="font-family:var(--font);font-weight:400;font-size:1.08rem;color:var(--text-dim);margin-top:10px">Source Sans 3 · body text</span>
-        </div>
-        <div class="body">
-          <h3>Fonts</h3>
-          <div class="desc">League Spartan (Light, Regular, SemiBold, Bold) for headings and UI; Source Sans 3 for body text. Both are free under the SIL Open Font License, on Google Fonts. Josefin Sans is retired. Brandon Grotesque lives only inside the logo files; never typeset it yourself.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/f1r3fly-brand-fonts">Download fonts</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://fonts.google.com/specimen/Source+Sans+3">Google Fonts</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- TEMPLATES & GRID -->
-<section id="templates">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Templates &amp; grid</h2>
-      <span class="hint">Ready-made layouts and the working grid</span>
-    </div>
-    <div class="card-grid">
-
-      <div class="card">
-        <div class="well"><img class="cover" src="templates/f1r3fly-brand-grid-preview.png" alt="F1R3FLY layout grid shown over a social post" /></div>
-        <div class="body">
-          <h3>Layout grid</h3>
-          <div class="desc">The 6-column grid behind every F1R3FLY layout, the same one in the brand books. Drop it over your artboard to keep margins, columns, and baselines consistent across anything you build. PNG · SVG · PDF.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="templates/f1r3fly-brand-grid.zip">Download grid (.zip)</a>
-            <a class="btn" target="_blank" rel="noopener" href="templates/f1r3fly-brand-grid.svg">SVG</a>
-            <a class="btn" target="_blank" rel="noopener" href="templates/f1r3fly-brand-grid.pdf">PDF</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="well">
-          <img class="shot" src="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/templates/social-media-templates/linkedin-post/f1r3fly-io-social-square-1080-tagline-bold-brand-ellipse.png" alt="social template" />
-          <img class="shot" src="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/templates/social-media-templates/linkedin-post/f1r3fly-io-social-square-1080-stat-gradient-dark-orb.png" alt="social template" />
-        </div>
-        <div class="body">
-          <h3>Social templates</h3>
-          <div class="desc">Ready-to-post square 1080 layouts: announcements, quotes, stats, and taglines. Grab the PNG to post now, or the editable SVG/PDF source to customize.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/templates/social-media-templates/linkedin-post">Browse templates</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- SOCIAL MEDIA -->
-<section id="social">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Social media</h2>
-      <span class="hint">Profile pictures and animated post templates</span>
-    </div>
-    <div class="card-grid">
-
-      <div class="card">
-        <div class="well">
-          <img class="avatar" src="F1R3FLY-IO-Brand-Assets/social-media/f1r3fly-io-avatar-bug-wordmark-ring.svg" alt="F1R3FLY.IO profile picture: bug and wordmark in a ring" />
-          <img class="avatar sq" src="F1R3FLY-IO-Brand-Assets/social-media/f1r3fly-io-avatar-bug-square-black.svg" alt="F1R3FLY.IO profile picture: bug on black" />
-        </div>
-        <div class="body">
-          <h3>F1R3FLY.IO profile pictures</h3>
-          <div class="meta">YouTube · X · Bluesky · LinkedIn</div>
-          <div class="desc">Made for the profile slot on each platform. The bug and wordmark in a thin ring for YouTube, X, and Bluesky. The bug alone on black for LinkedIn. 2000 × 2000. SVG · PNG · PDF.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-IO-Brand-Assets/social-media/f1r3fly-io-avatar-bug-wordmark-ring.zip">Ring (.zip)</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-IO-Brand-Assets/social-media/f1r3fly-io-avatar-bug-square-black.zip">Square (.zip)</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/F1R3FLY-IO-Brand-Assets/social-media">Browse</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="well thumbs two"><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-01-logo-intro-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-01-logo-intro-square.mp4" aria-label="Template 01 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-01-logo-intro-portrait-thumb.png" src="templates/canva-animated/f1r3fly-io-template-01-logo-intro-portrait.mp4" aria-label="Template 01 preview"></video></div>
-        <div class="body">
-          <h3>Logo intro</h3>
-          <div class="meta">Animated Canva template 01 · Square and Portrait</div>
-          <div class="desc">The F1R3FLY.IO logo rises in, then the eyebrow, headline, and bullets. Open it in Canva for your own editable copy. Hover or tap a preview to play it.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://canva.link/8gpidz1itwsumvk">Open in Canva: Square</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://canva.link/ni2jv95vgtj2fw3">Portrait</a>
-          </div>
-          <div class="dl-row"><b>MP4:</b> <a href="templates/canva-animated/f1r3fly-io-template-01-logo-intro-square.mp4" download>Square</a> · <a href="templates/canva-animated/f1r3fly-io-template-01-logo-intro-portrait.mp4" download>Portrait</a></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="well thumbs four"><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-02-grey-to-navy-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-02-grey-to-navy-square.mp4" aria-label="Template 02 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-03-teal-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-03-teal-square.mp4" aria-label="Template 03 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-04-magenta-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-04-magenta-square.mp4" aria-label="Template 04 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-05-green-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-05-green-square.mp4" aria-label="Template 05 preview"></video></div>
-        <div class="body">
-          <h3>Gradient backgrounds</h3>
-          <div class="meta">Animated Canva templates 02 to 05 · Square and Portrait</div>
-          <div class="desc">The four website section colors behind the same text animation: grey to navy, teal, magenta, and green. All four come in one Canva file; keep the page you need.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="https://canva.link/faibjulz5u3rop1">Open in Canva: Square</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://canva.link/7pooqvi22t905u9">Portrait</a>
-          </div>
-          <div class="dl-row"><b>MP4, square:</b> <a href="templates/canva-animated/f1r3fly-io-template-02-grey-to-navy-square.mp4" download>02</a> · <a href="templates/canva-animated/f1r3fly-io-template-03-teal-square.mp4" download>03</a> · <a href="templates/canva-animated/f1r3fly-io-template-04-magenta-square.mp4" download>04</a> · <a href="templates/canva-animated/f1r3fly-io-template-05-green-square.mp4" download>05</a></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="well thumbs five"><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-06-panel-loop-grey-to-navy-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-06-panel-loop-grey-to-navy-square.mp4" aria-label="Template 06 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-07-panel-loop-teal-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-07-panel-loop-teal-square.mp4" aria-label="Template 07 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-08-panel-loop-magenta-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-08-panel-loop-magenta-square.mp4" aria-label="Template 08 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-09-firefly-panel-straight-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-09-firefly-panel-straight-square.mp4" aria-label="Template 09 preview"></video><video muted loop playsinline preload="none" poster="templates/canva-animated/f1r3fly-io-template-10-firefly-panel-curved-square-thumb.png" src="templates/canva-animated/f1r3fly-io-template-10-firefly-panel-curved-square.mp4" aria-label="Template 10 preview"></video></div>
-        <div class="body">
-          <h3>Panel loops</h3>
-          <div class="meta">Animated Canva templates 06 to 10 · Square</div>
-          <div class="desc">A looping video panel beside the text: three gradient loops and two firefly loops.</div>
-          <!--CANVA-06-10-->
-          <div class="dl-row"><b>MP4, square:</b> <a href="templates/canva-animated/f1r3fly-io-template-06-panel-loop-grey-to-navy-square.mp4" download>06</a> · <a href="templates/canva-animated/f1r3fly-io-template-07-panel-loop-teal-square.mp4" download>07</a> · <a href="templates/canva-animated/f1r3fly-io-template-08-panel-loop-magenta-square.mp4" download>08</a> · <a href="templates/canva-animated/f1r3fly-io-template-09-firefly-panel-straight-square.mp4" download>09</a> · <a href="templates/canva-animated/f1r3fly-io-template-10-firefly-panel-curved-square.mp4" download>10</a></div>
-        </div>
-      </div>
-
-    </div>
-    <p class="section-note"><b>How &ldquo;Open in Canva&rdquo; works:</b> you get your own copy in a free Canva account (sign-in required), and the original stays as it is. For the full type weights, install League Spartan and Source Sans 3 from <a href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/tree/main/f1r3fly-brand-fonts" target="_blank" rel="noopener">the brand fonts</a> or <a href="https://fonts.google.com/specimen/League+Spartan" target="_blank" rel="noopener">Google Fonts</a>.</p>
-  </div>
-</section>
-
-<!-- AI BRAND KIT + QUICK GUIDE (side by side) -->
-<section id="kit">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>AI brand kit &amp; quick guide</h2>
-      <span class="hint">Stay on-brand, and find the right file</span>
-    </div>
-    <div class="help-grid">
-
-      <div class="card">
-        <div class="well" style="flex-direction:column;gap:14px">
-          <img class="icon" style="max-height:52px" src="https://raw.githubusercontent.com/hannahadamsdesign-spec/f1r3fly-brand-portal/main/F1R3FLY-IO-Brand-Assets/f1r3fly-io-bug-icon-color-on-dark.svg" alt="" />
-          <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:0.92rem;color:var(--text-dim)">f1r3fly-brand-kit<span style="color:var(--sky)">.skill</span></span>
-        </div>
-        <div class="body">
-          <h3>Brand kit skill</h3>
-          <div class="desc">A machine-readable brand spec for Claude, ChatGPT, and other AI tools: exact colors, type, logo rules, and voice, so anything they generate comes out on-brand the first time. Install the skill, or read the spec.</div>
-          <div class="btn-row">
-            <a class="btn primary" target="_blank" rel="noopener" href="f1r3fly-brand-kit/f1r3fly-brand-kit.skill">Download skill</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/blob/main/f1r3fly-brand-kit/SKILL.md">Read the spec</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="cheat-panel">
-        <h3>Which file do I use?</h3>
-        <p class="lead">Find what you&rsquo;re doing on the left. Grab the file on the right.</p>
-        <div class="cheat">
-          <table>
-            <thead>
-              <tr><th>What you&rsquo;re doing</th><th>Pick this one</th><th>Best file</th></tr>
-            </thead>
-            <tbody>
-              <tr><td class="need">Your background is dark or black</td><td>the <code>color-on-dark</code> logo</td><td>SVG (or PNG)</td></tr>
-              <tr><td class="need">Your background is white or light</td><td><code>color-on-light</code> (knot) or <code>white-background</code> (bug)</td><td>SVG (or PNG)</td></tr>
-              <tr><td class="need">You&rsquo;re printing in just black and white</td><td><code>bw-on-light</code> (knot) or <code>BW-white-background</code> (bug)</td><td>PDF or SVG</td></tr>
-              <tr><td class="need">It goes on a photo or a bright color</td><td>the <code>white</code> logo</td><td>SVG (or PNG)</td></tr>
-              <tr><td class="need">You need a tiny icon, like a profile picture</td><td>the knot (Industries) or the bug (.IO)</td><td>SVG or PNG</td></tr>
-              <tr><td class="need">You&rsquo;re not sure which brand</td><td>Knot = Industries. Bug = F1R3FLY.IO.</td><td>Any</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="filehelp">New to the file types? <b>SVG</b> stays sharp at any size; use it when you can. <b>PNG</b> is a picture with a see-through background. <b>PDF</b> is best for printing or just looking.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <hr class="grad-rule" style="margin-bottom:26px" />
-    <div class="frow">
-      <p>&copy; F1R3FLY Industries, 2026. All rights reserved.</p>
-      <p><a class="repo" target="_blank" rel="noopener" href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal">View the repository &rarr;</a></p>
-    </div>
-  </div>
-</footer>
-
-<script>
-  // Animated template previews: play on hover or tap, pause when the pointer leaves.
-  document.querySelectorAll('.well.thumbs video').forEach(function (v) {
-    var play = function () { try { v.play(); } catch (e) {} };
-    v.addEventListener('mouseenter', play);
-    v.addEventListener('mouseleave', function () { v.pause(); });
-    v.addEventListener('click', function () { v.paused ? play() : v.pause(); });
-  });
-</script>
-</body>
-</html>
+:root{--black:#000;--panel:#001626;--panel-edge:#0d3050;--white:#fff;--yellow:#f3d630;--sky:#3fa9f5;--text:#f2f2f2;--text-dim:#d2dae0;
+--sig-gradient:linear-gradient(to right,#f3d630,#3fa9f5);--btn-gradient:linear-gradient(to right,#00528c,#009188);--font:"Source Sans 3",sans-serif;--head:"League Spartan",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--text);font-family:var(--font);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.9em;color:var(--sky)}
+.wrap{width:100%;max-width:1700px;padding:0 clamp(16px,4vw,68px)}
+.eyebrow{font-family:var(--head);font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:.78rem;color:transparent;background:var(--sig-gradient);-webkit-background-clip:text;background-clip:text;width:max-content}
+.crumbs{padding:34px 0 0;font-family:var(--head);font-weight:600;font-size:.86rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.crumbs a{color:var(--sky)}.crumbs a:hover{text-decoration:underline}.crumbs .sep{color:#4a5862}.crumbs .here{color:var(--white)}
+header.hero{padding:26px 0 22px}.hero-row{display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.hero h1{font-family:var(--head);font-weight:700;text-transform:uppercase;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.02}
+.last-update{font-family:var(--head);font-weight:600;text-transform:uppercase;letter-spacing:.1em;font-size:.95rem}
+.grad-rule{height:1px;background:var(--sig-gradient);border:0;width:100%}
+.intro{padding:20px 0 4px}.intro p{font-size:1.12rem;color:var(--text-dim);max-width:52em}
+.which{margin:22px 0 6px;background:var(--panel);border:1px solid var(--panel-edge);border-radius:14px;padding:18px 22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px 28px;max-width:1100px}
+.which h3{font-family:var(--head);font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);grid-column:1/-1}
+.which div{font-size:.98rem;color:var(--text-dim)}.which b{color:var(--white)}
+section{padding:26px 0}.section-head{display:flex;align-items:baseline;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.section-head h2{font-family:var(--head);font-weight:700;font-size:1.5rem}.section-head .hint{color:var(--text-dim);font-size:.98rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--panel-edge);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}.card.linkcard{transition:border-color .2s,transform .2s}
+.card.linkcard:hover{border-color:var(--sky);transform:translateY(-2px)}
+.well{min-height:200px;padding:26px;display:flex;align-items:center;justify-content:center;gap:20px;border-bottom:1px solid var(--panel-edge);background:#0a0a0a}
+.well.light{background:#fff}.well.book{min-height:300px}.well.checker{background-color:#cfcfcf;background-image:linear-gradient(45deg,#9a9a9a 25%,transparent 25%),linear-gradient(-45deg,#9a9a9a 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#9a9a9a 75%),linear-gradient(-45deg,transparent 75%,#9a9a9a 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}.well.checker.dark{background-color:#3a3a3a;background-image:linear-gradient(45deg,#262626 25%,transparent 25%),linear-gradient(-45deg,#262626 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#262626 75%),linear-gradient(-45deg,transparent 75%,#262626 75%)}
+.well img{max-height:150px;max-width:82%;display:block}.well img.round{border-radius:50%}.well img.tall{max-height:170px}
+.well img.panel{outline:1px solid #2e3a44}.well img.cover{max-height:248px;border:1px solid #4a5862;border-radius:4px;box-shadow:0 8px 30px rgba(0,0,0,.55)}
+.well img.post{max-height:230px;max-width:100%;border-radius:6px}.well img.shot{max-height:168px;max-width:46%;border-radius:6px}
+.body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex-grow:1}
+.body h3{font-family:var(--head);font-weight:700;font-size:1.12rem;line-height:1.3}
+.body .meta{font-family:var(--head);font-weight:700;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow)}
+.body .desc{font-size:.97rem;color:var(--text-dim)}
+.body .file{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.76rem;color:var(--sky);overflow-wrap:break-word}
+.btns{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto;padding-top:10px}
+.btn{font-family:var(--head);font-weight:700;font-size:.8rem;letter-spacing:.04em;padding:9px 13px;border-radius:8px;border:1px solid #20486b;color:var(--white);transition:all .18s;display:inline-block}
+.btn:hover{border-color:var(--sky);color:var(--sky)}.btn.primary{background:var(--btn-gradient);border:0}.btn.primary:hover{color:#fff;filter:brightness(1.1)}
+.more{margin-top:14px;font-family:var(--head);font-weight:600;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim)}
+.note{margin-top:18px;font-size:.97rem;color:var(--text-dim);max-width:60em;line-height:1.7}.note b{color:var(--white)}.note a{color:var(--sky);font-weight:600}
+.swrow{display:flex;width:100%;height:188px}.swrow span{flex:1}
+.well.thumbs{gap:10px;padding:18px;flex-wrap:wrap}.well.thumbs video{border-radius:6px;background:#000;display:block;object-fit:cover}
+.well.thumbs.two video{width:calc(50% - 5px)}.well.thumbs.four video{width:calc(25% - 8px)}.well.thumbs.five video{width:calc(33.333% - 7px)}
+.dl{font-size:.92rem;color:var(--text-dim);line-height:1.8}.dl b{color:var(--white)}.dl a{color:var(--sky);font-weight:600}.dl a:hover{text-decoration:underline}
+footer{margin-top:30px;padding:30px 0 60px;border-top:1px solid #0a2236}footer .frow{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer p{font-size:.86rem;color:var(--text-dim)}footer a{color:var(--sky);font-weight:600}
+/* home layout: left nav + content */
+.layout{display:grid;grid-template-columns:250px 1fr;gap:clamp(24px,4vw,64px);align-items:start}
+nav.side{position:sticky;top:28px;padding-top:6px;border-right:1px solid #0a2236}
+nav.side a{display:block;font-family:var(--head);font-weight:700;font-size:1.08rem;padding:6px 0;color:var(--white)}
+nav.side a.sub{font-weight:400;font-size:.98rem;padding:3px 0 3px 18px;color:var(--text-dim)}
+nav.side a:hover{color:var(--sky)}nav.side .gap{height:12px}nav.side .soon{display:block;font-family:var(--head);font-size:.86rem;padding:3px 0 3px 18px;color:#6f7d88;font-style:italic}
+@media (max-width:900px){.layout{grid-template-columns:1fr}nav.side{position:static;border-right:0;border-bottom:1px solid #0a2236;padding-bottom:14px;display:flex;flex-wrap:wrap;gap:4px 18px}nav.side a.sub{padding-left:0}nav.side .gap{display:none}}
+</style></head><body>
+<header class="hero" style="padding-top:60px"><div class="wrap"><div class="eyebrow">Brand assets &amp; guidelines</div><div class="hero-row" style="margin-top:12px"><h1>F1R3FLY Brand Portal</h1><div class="last-update">Last update: November 6, 2026</div></div></div></header><div class="wrap"><hr class="grad-rule"></div>
+<div class="wrap" style="padding-top:30px"><div class="layout"><nav class="side" aria-label="Sections"><a href="#books">Brand Books</a><div class="gap"></div><a href="#logos">Primary Logos</a><a class="sub" href="logos/ff.io/index.html">F1R3FLY.IO</a><a class="sub" href="logos/ff.indust/index.html">F1R3FLY INDUSTRIES</a><a class="sub" href="logos/flang/index.html">F1R3L@NG</a><div class="gap"></div><a href="#products">Product Logos</a><a class="sub" href="products/ign/index.html">ign1t10n</a><span class="sub soon">More coming</span><div class="gap"></div><a href="#system">Color, Fonts and Layout</a><div class="gap"></div><a href="#social">Social Media Assets</a></nav><main><div class="intro" style="padding-top:0"><p>Pick a category, preview the file, and download it. Three brands live here: F1R3FLY Industries (the trefoil knot), F1R3FLY.IO (the firefly bug), and f1r3lang (the language, formerly Rholang). Below them, the product logos, starting with ign1t10n, the installer.</p></div><section id="books"><div class="section-head"><h2>Brand books</h2><span class="hint">The deep reference for each brand</span></div><div class="grid">
+<div class="card"><div class="well book"><img class="cover" src="books/ff.indust-brand-style-guide-cover.png" alt="F1R3FLY Industries Brand Style Guide cover"></div><div class="body"><h3>F1R3FLY Industries</h3><div class="meta">Brand Style Guide &middot; September 2026</div><div class="desc">The master-brand rulebook for the trefoil knot. Logo construction and clearspace, brand architecture, the layout grid, color, typography, and voice.</div><div class="btns"><a class="btn primary" href="books/ff.indust-brand-style-guide-2026-09.pdf" target="_blank" rel="noopener">Download PDF</a></div></div></div>
+<div class="card"><div class="well book"><img class="cover" src="books/ff.io-brand-guidebook-cover.png" alt="F1R3FLY.IO Brand Guidebook cover"></div><div class="body"><h3>F1R3FLY.IO</h3><div class="meta">Brand Guidebook &middot; September 2026</div><div class="desc">The developer-platform rulebook for the firefly bug. The same depth as the Industries guide, tuned for F1R3FLY.IO.</div><div class="btns"><a class="btn primary" href="books/ff.io-brand-guidebook-2026-09.pdf" target="_blank" rel="noopener">Download PDF</a></div></div></div>
+</div></section><section id="logos"><div class="section-head"><h2>Primary logos</h2><span class="hint">Click a brand to see every variant on its own background</span></div><div class="grid"><div class="card linkcard"><a href="logos/ff.io/index.html"><div class="well"><img src="logos/ff.io/ff.io-logo-wide-color-transp-dark.svg" alt="F1R3FLY.IO logo" style="max-height:90px;max-width:76%"></div></a>
+<div class="body"><h3>F1R3FLY.IO</h3><div class="desc">The developer platform: the firefly bug and wordmark. Wide and stacked, with and without the circle, for dark and light backgrounds. 15 variants.</div>
+<div class="btns"><a class="btn primary" href="logos/ff.io/index.html">See all variants</a><a class="btn" href="logos/ff.io/ff.io-logo-wide-color-transp-dark.zip" download>Download the main logo</a></div></div></div><div class="card linkcard"><a href="logos/ff.indust/index.html"><div class="well"><img src="logos/ff.indust/ff.indust-logo-wide-color-transp-dark.svg" alt="F1R3FLY Industries logo" style="max-height:90px;max-width:76%"></div></a>
+<div class="body"><h3>F1R3FLY Industries</h3><div class="desc">The parent brand: the trefoil knot and wordmark. Wide and stacked, with and without the circle, for dark and light backgrounds. 15 variants.</div>
+<div class="btns"><a class="btn primary" href="logos/ff.indust/index.html">See all variants</a><a class="btn" href="logos/ff.indust/ff.indust-logo-wide-color-transp-dark.zip" download>Download the main logo</a></div></div></div><div class="card linkcard"><a href="logos/flang/index.html"><div class="well"><img src="logos/flang/flang-logo-color-transp-dark.svg" alt="f1r3lang logo" style="max-height:90px;max-width:76%"></div></a>
+<div class="body"><h3>f1r3lang</h3><div class="desc">The language brand, formerly Rholang. The f1r3|@ng wordmark in color, white and black, transparent or on a solid panel. 8 variants.</div>
+<div class="btns"><a class="btn primary" href="logos/flang/index.html">See all variants</a><a class="btn" href="logos/flang/flang-logo-color-transp-dark.zip" download>Download the main logo</a></div></div></div></div></section><section id="products"><div class="section-head"><h2>Product logos</h2><span class="hint">Marks for the things built on F1R3FLY</span></div><div class="grid"><div class="card linkcard"><a href="products/ign/index.html"><div class="well"><img src="products/ign/ign-logo-wide-color-transp-dark.svg" alt="ign1t10n logo" style="max-height:90px;max-width:76%"></div></a>
+<div class="body"><h3>ign1t10n</h3><div class="desc">The installer and local-shard app. The on-button and wordmark, wide and stacked, plus the app icon. Lockups are drafts pending sign-off. 7 variants.</div>
+<div class="btns"><a class="btn primary" href="products/ign/index.html">See all variants</a><a class="btn" href="products/ign/ign-logo-wide-color-transp-dark.zip" download>Download the main logo</a></div></div></div></div><p class="more">More coming</p></section><section id="system"><div class="section-head"><h2>Color, fonts and layout</h2><span class="hint">The system everything is built on</span></div><div class="grid">
+<div class="card"><div class="well" style="padding:0"><div class="swrow"><span style="background:#000;border-right:1px solid #0d3050"></span><span style="background:#fff"></span><span style="background:#f3d630"></span><span style="background:#3fa9f5"></span></div></div><div class="body"><h3>Colors</h3><div class="desc">Black <code>#000000</code>, White, Brand Yellow <code>#F3D630</code>, and Brand Sky <code>#3FA9F5</code>, with the signature gradient running yellow &rarr; sky. The PDF shows the full system; the swatch pack drops the palette into Illustrator, Photoshop, and Canva.</div><div class="btns"><a class="btn primary" href="system/ff-color-system-2026-06.pdf" target="_blank" rel="noopener">Color system (PDF)</a><a class="btn" href="system/ff-swatches.zip" download>Swatch pack (zip)</a></div></div></div>
+<div class="card"><div class="well" style="flex-direction:column;gap:7px;align-items:flex-start;padding:30px 32px"><span style="font-family:'League Spartan',sans-serif;font-weight:700;font-size:2rem;line-height:1">League Spartan</span><span style="font-family:var(--head);font-weight:700;font-size:.72rem;letter-spacing:.14em;color:var(--yellow)">HEADINGS &middot; UI</span><span style="font-size:1.08rem;color:var(--text-dim);margin-top:10px">Source Sans 3 &middot; body text</span></div><div class="body"><h3>Fonts</h3><div class="desc">League Spartan (Light, Regular, SemiBold, Bold) for headings and UI; Source Sans 3 for body text. Both free under the SIL Open Font License. Brandon Grotesque lives only inside the logo files; never typeset it yourself.</div><div class="btns"><a class="btn primary" href="fonts/ff-fonts.zip" download>Download fonts (zip)</a><a class="btn" href="https://fonts.google.com/specimen/League+Spartan" target="_blank" rel="noopener">Google Fonts</a></div></div></div>
+<div class="card"><div class="well"><img class="cover" src="system/ff-grid-preview.png" alt="F1R3FLY layout grid over a social post" style="max-height:184px;border:0;box-shadow:none"></div><div class="body"><h3>Layout grid</h3><div class="desc">The 6-column grid behind every F1R3FLY layout, the same one in the brand books. Drop it over your artboard to keep margins, columns, and baselines consistent.</div><div class="btns"><a class="btn" href="system/ff-grid.pdf" download>PDF</a><a class="btn" href="system/ff-grid.svg" download>SVG</a><a class="btn" href="system/ff-grid.png" download>PNG</a><a class="btn primary" href="system/ff-grid.zip" download>ALL (zip)</a></div></div></div>
+</div></section><section id="social"><div class="section-head"><h2>Social media assets</h2><span class="hint">Profile pictures, post templates, and animated Canva templates</span></div><div class="grid">
+<div class="card linkcard"><a href="logos/ff.io/index.html#profile"><div class="well"><img src="logos/ff.io/ff.io-avatar-ring-color-onblack.svg" alt="F1R3FLY.IO profile picture, ring" class="round" style="max-height:140px"><img src="logos/ff.io/ff.io-avatar-square-color-onblack.svg" alt="F1R3FLY.IO profile picture, square" style="max-height:140px;border-radius:10px"></div></a><div class="body"><h3>F1R3FLY.IO profile pictures</h3><div class="meta">YouTube &middot; X &middot; Bluesky &middot; LinkedIn</div><div class="desc">The bug and wordmark in a thin ring for YouTube, X and Bluesky; the bug alone on black for LinkedIn. 2000 x 2000.</div><div class="btns"><a class="btn primary" href="logos/ff.io/ff.io-avatar-ring-color-onblack.zip" download>Ring (zip)</a><a class="btn" href="logos/ff.io/ff.io-avatar-square-color-onblack.zip" download>Square (zip)</a><a class="btn" href="logos/ff.io/index.html">All F1R3FLY.IO files</a></div></div></div>
+<div class="card linkcard"><a href="social/templates/index.html"><div class="well"><img class="shot" src="social/templates/ff.io-post-square-tagline-bold-brand-ellipse.png" alt="social template"><img class="shot" src="social/templates/ff.io-post-square-stat-gradient-dark-orb.png" alt="social template"></div></a><div class="body"><h3>Social post templates</h3><div class="desc">Sixteen ready-to-post 1080 squares: announcements, articles, quotes, events, stats and taglines. Grab the PNG to post now, or the SVG or PDF source to customize.</div><div class="btns"><a class="btn primary" href="social/templates/index.html">See all sixteen</a></div></div></div>
+<div class="card"><div class="well thumbs two"><video muted loop playsinline preload="none" poster="social/canva/ff.io-canva-01-logo-intro-square-thumb.png" src="social/canva/ff.io-canva-01-logo-intro-square.mp4" aria-label="Template 01 preview"></video><video muted loop playsinline preload="none" poster="social/canva/ff.io-canva-01-logo-intro-portrait-thumb.png" src="social/canva/ff.io-canva-01-logo-intro-portrait.mp4" aria-label="Template 01 preview"></video></div><div class="body"><h3>Logo intro</h3><div class="meta">Animated Canva template 01 &middot; Square and Portrait</div><div class="desc">The F1R3FLY.IO logo rises in, then the eyebrow, headline, and bullets. Open it in Canva for your own editable copy. Hover or tap a preview to play it.</div><div class="btns"><a class="btn primary" href="https://canva.link/8gpidz1itwsumvk" target="_blank" rel="noopener">Open in Canva: Square</a><a class="btn" href="https://canva.link/ni2jv95vgtj2fw3" target="_blank" rel="noopener">Portrait</a></div><div class="dl"><b>MP4:</b> <a href="social/canva/ff.io-canva-01-logo-intro-square.mp4" download>Square</a> &middot; <a href="social/canva/ff.io-canva-01-logo-intro-portrait.mp4" download>Portrait</a></div></div></div>
+<div class="card"><div class="well thumbs four"><video muted loop playsinline preload="none" poster="social/canva/ff.io-canva-02-grey-to-navy-square-thumb.png" src="social/canva/ff.io-canva-02-grey-to-navy-square.mp4" aria-label="Template 02 preview"></video><video muted loop playsinline preload="none" poster="social/canva/ff.io-canva-03-teal-square-thumb.png" src="social/canva/ff.io-canva-03-teal-square.mp4" aria-label="Template 03 preview"></video><video muted loop playsinline preload="none" poster="social/canva/ff.io-canva-04-magenta-square-thumb.png" src="social/canva/ff.io-canva-04-magenta-square.mp4" aria-label="Template 04 preview"></video><video muted loop playsinline preload="none" poster="social/canva/ff.io-canva-05-green-square-thumb.png" src="social/canva/ff.io-canva-05-green-square.mp4" aria-label="Template 05 preview"></video></div><div class="body"><h3>Gradient backgrounds</h3><div class="meta">Animated Canva templates 02 to 05 &middot; Square and Portrait</div><div class="desc">The four website section colors behind the same text animation: grey to navy, teal, magenta, and green. All four come in one Canva file; keep the page you need.</div><div class="btns"><a class="btn primary" href="https://canva.link/faibjulz5u3rop1" target="_blank" rel="noopener">Open in Canva: Square</a><a class="btn" href="https://canva.link/7pooqvi22t905u9" target="_blank" rel="noopener">Portrait</a></div><div class="dl"><b>MP4, square:</b> <a href="social/canva/ff.io-canva-02-grey-to-navy-square.mp4" download>02</a> &middot; <a href="social/canva/ff.io-canva-03-teal-square.mp4" download>03</a> &middot; <a href="social/canva/ff.io-canva-04-magenta-square.mp4" download>04</a> &middot; <a href="social/canva/ff.io-canva-05-green-square.mp4" download>05</a></div></div></div>
+<div class="card"><div class="well thumbs five"><video muted loop playsinline preload="none" poster="social/canva/ff.io-canva-06-panel-loop-grey-to-navy-square-thumb.png" src="social/canva/ff.io-canva-06-panel-loop-grey-to-navy-square.mp4" aria-label="Template 06 preview"></video><video muted loop playsinline preload="none" poster="social/canva/ff.io-canva-07-panel-loop-teal-square-thumb.png" src="social/canva/ff.io-canva-07-panel-loop-teal-square.mp4" aria-label="Template 07 preview"></video><video muted loop playsinline preload="none" poster="social/canva/ff.io-canva-08-panel-loop-magenta-square-thumb.png" src="social/canva/ff.io-canva-08-panel-loop-magenta-square.mp4" aria-label="Template 08 preview"></video><video muted loop playsinline preload="none" poster="social/canva/ff.io-canva-09-firefly-panel-straight-square-thumb.png" src="social/canva/ff.io-canva-09-firefly-panel-straight-square.mp4" aria-label="Template 09 preview"></video><video muted loop playsinline preload="none" poster="social/canva/ff.io-canva-10-firefly-panel-curved-square-thumb.png" src="social/canva/ff.io-canva-10-firefly-panel-curved-square.mp4" aria-label="Template 10 preview"></video></div><div class="body"><h3>Panel loops</h3><div class="meta">Animated Canva templates 06 to 10 &middot; Square</div><div class="desc">A looping video panel beside the text: three gradient loops and two firefly loops.</div><!--CANVA-06-10--><div class="dl"><b>MP4, square:</b> <a href="social/canva/ff.io-canva-06-panel-loop-grey-to-navy-square.mp4" download>06</a> &middot; <a href="social/canva/ff.io-canva-07-panel-loop-teal-square.mp4" download>07</a> &middot; <a href="social/canva/ff.io-canva-08-panel-loop-magenta-square.mp4" download>08</a> &middot; <a href="social/canva/ff.io-canva-09-firefly-panel-straight-square.mp4" download>09</a> &middot; <a href="social/canva/ff.io-canva-10-firefly-panel-curved-square.mp4" download>10</a></div></div></div>
+</div><p class="note"><b>How &ldquo;Open in Canva&rdquo; works:</b> you get your own copy in a free Canva account (sign-in required), and the original stays as it is. For the full type weights, install League Spartan and Source Sans 3 from <a href="fonts/ff-fonts.zip">the brand fonts</a> or <a href="https://fonts.google.com/specimen/League+Spartan" target="_blank" rel="noopener">Google Fonts</a>.</p></section></main></div></div>
+<footer><div class="wrap"><hr class="grad-rule" style="margin-bottom:26px"><div class="frow"><p>&copy; F1R3FLY Industries, 2026. All rights reserved.</p>
+<p><a href="index.html">Home</a> &middot; AI brand kit: <a href="kit/f1r3fly-brand-kit.skill" download>download the skill</a> &middot; <a href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal/blob/main/kit/SKILL.md" target="_blank" rel="noopener">read the spec</a> &middot; <a href="https://github.com/hannahadamsdesign-spec/f1r3fly-brand-portal" target="_blank" rel="noopener">repository &rarr;</a></p></div></div></footer>
+<script>document.querySelectorAll('.well.thumbs video').forEach(function(v){var p=function(){try{v.play()}catch(e){}};v.addEventListener('mouseenter',p);v.addEventListener('mouseleave',function(){v.pause()});v.addEventListener('click',function(){v.paused?p():v.pause()})});</script></body></html>
