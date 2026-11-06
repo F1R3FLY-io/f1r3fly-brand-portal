@@ -22,7 +22,7 @@ Last update: November 6, 2026. Reorganised 2026-11-06: new folder layout, new fi
 - `social/canva/` MP4 previews and thumbnails of the animated Canva templates (links on the home page)
 - `kit/` the AI brand kit skill (`f1r3fly-brand-kit.skill`) and its spec (`SKILL.md`)
 - `build/` the manifest and the script that generates the pages and files
-- `_archive/` retired files, including F1R3Gaze (the browser was renamed; its marks are no longer in use)
+- Retired files (F1R3Gaze, the old template folder, the June 10 color system) are not deployed; they live in git history before 2026-11-06 and in Dropbox `05 Brand Portal/`
 
 ## File names
 

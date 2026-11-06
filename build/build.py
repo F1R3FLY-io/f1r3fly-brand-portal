@@ -7,7 +7,7 @@ Reads assets.json and the OLD repo, writes a complete NEW repo tree:
   products/ign/              same, for ign1t10n
   social/templates/          LinkedIn post templates, preview page
   social/canva/              animated Canva template previews (MP4 + thumbs)
-  books/, system/, fonts/, kit/, review-files/, _archive/, build/
+  books/, system/, fonts/, kit/, review-files/, build/
 
 Usage: python3 build.py <old-repo> <new-tree>
 """
@@ -335,7 +335,7 @@ Last update: {UPDATE}. Reorganised 2026-11-06: new folder layout, new file names
 - `social/canva/` MP4 previews and thumbnails of the animated Canva templates (links on the home page)
 - `kit/` the AI brand kit skill (`f1r3fly-brand-kit.skill`) and its spec (`SKILL.md`)
 - `build/` the manifest and the script that generates the pages and files
-- `_archive/` retired files, including F1R3Gaze (the browser was renamed; its marks are no longer in use)
+- Retired files (F1R3Gaze, the old template folder, the June 10 color system) are not deployed; they live in git history before 2026-11-06 and in Dropbox `05 Brand Portal/`
 
 ## File names
 
@@ -446,11 +446,7 @@ def main():
     with zipfile.ZipFile(os.path.join(kdest, 'f1r3fly-brand-kit.skill'), 'w', zipfile.ZIP_DEFLATED) as z: z.writestr('f1r3fly-brand-kit/SKILL.md', skill)
     # review files, archive
     shutil.copytree(os.path.join(OLD, 'review-files'), os.path.join(OUT, 'review-files'), dirs_exist_ok=True)
-    shutil.copytree(os.path.join(OLD, '_archive'), os.path.join(OUT, '_archive'), dirs_exist_ok=True)
-    shutil.copytree(os.path.join(OLD, 'F1R3Gaze-Brand-Assets'), os.path.join(OUT, '_archive/F1R3Gaze-Brand-Assets'), dirs_exist_ok=True)
-    shutil.copytree(os.path.join(OLD, 'templates/social-media-templates'), os.path.join(OUT, '_archive/social-media-templates-2026-10'), dirs_exist_ok=True)
-    cp(os.path.join(OLD, 'F1R3FLY-Industries-Brand-Assets/f1r3fly-brand-color-system-06.10.2026.pdf'), os.path.join(OUT, '_archive/f1r3fly-brand-color-system-06.10.2026.pdf'))
-    cp(os.path.join(OLD, 'F1R3FLY-Industries-Brand-Assets/f1r3fly-brand-color-system-06.10.2026.svg'), os.path.join(OUT, '_archive/f1r3fly-brand-color-system-06.10.2026.svg'))
+    # retired files are not deployed; they live in git history and in Dropbox (05 Brand Portal/)
     # build tools
     bdest = ensure(os.path.join(OUT, 'build'))
     for f in ('assets.json', 'build.py', 'svg_flatten.py'): cp(os.path.join(HERE, f), os.path.join(bdest, f))
