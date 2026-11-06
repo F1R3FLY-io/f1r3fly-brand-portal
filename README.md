@@ -10,7 +10,7 @@ Last update: November 6, 2026. Reorganised 2026-11-06: new folder layout, new fi
 
 | Brand | Folder | What |
 |---|---|---|
-| **[F1R3FLY.IO →](logos/ff.io/)** | `logos/ff.io/` | 15 variants |
+| **[F1R3FLY.IO →](logos/ff.io/)** | `logos/ff.io/` | 17 variants |
 | **[F1R3FLY Industries →](logos/ff.indust/)** | `logos/ff.indust/` | 14 variants |
 | **[f1r3lang →](logos/flang/)** | `logos/flang/` | 8 variants |
 | **[ign1t10n →](products/ign/)** | `products/ign/` | 7 variants |
@@ -58,6 +58,8 @@ Raw file base for scripts and AI tools: `https://raw.githubusercontent.com/hanna
 - `f1r3fly-io-circle-icon-color-on-dark` → `ff.io-icon-circle-color-transp`
 - `f1r3fly-io-circle-icon-white` → `ff.io-icon-circle-white-transp`
 - `social-media/f1r3fly-io-avatar-bug-wordmark-ring` → `ff.io-avatar-ring-color-onblack`
+- `(new)` → `ff.io-avatar-ring-color-transp-dark`
+- `(new)` → `ff.io-avatar-ring-color-transp-light`
 - `social-media/f1r3fly-io-avatar-bug-square-black` → `ff.io-avatar-square-color-onblack`
 - `f1r3fly-industries-horizontal-logo-color-on-dark` → `ff.indust-logo-wide-color-transp-dark`
 - `f1r3fly-industries-horizontal-logo-color-on-black-solid` → `ff.indust-logo-wide-color-onblack`

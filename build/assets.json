@@ -119,14 +119,32 @@
     },
     {
      "title": "Profile pictures",
-     "hint": "Made for the profile slot. Ring for YouTube, X and Bluesky; square for LinkedIn. 2000 x 2000.",
+     "hint": "Use these lockups for social media only. Ring for YouTube, X and Bluesky; square for LinkedIn. 2000 x 2000.",
      "assets": [
       {
        "new": "ff.io-avatar-ring-color-onblack",
        "old": "social-media/f1r3fly-io-avatar-bug-wordmark-ring",
-       "name": "Ring: bug and wordmark on black",
+       "name": "Ring: bug and wordmark on a black square",
        "bg": "dark",
        "shape": "round"
+      },
+      {
+       "new": "ff.io-avatar-ring-color-transp-dark",
+       "old": null,
+       "src_svg": "NEW/ff.io-avatar-ring-color-transp-dark.svg",
+       "name": "Ring: white wordmark, transparent, for dark backgrounds",
+       "bg": "dark",
+       "shape": "round",
+       "note": "New, 2026-11-06"
+      },
+      {
+       "new": "ff.io-avatar-ring-color-transp-light",
+       "old": null,
+       "src_svg": "NEW/ff.io-avatar-ring-color-transp-light.svg",
+       "name": "Ring: black wordmark, transparent, for light backgrounds",
+       "bg": "light",
+       "shape": "round",
+       "note": "New, 2026-11-06"
       },
       {
        "new": "ff.io-avatar-square-color-onblack",

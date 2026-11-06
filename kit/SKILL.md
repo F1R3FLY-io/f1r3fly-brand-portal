@@ -218,7 +218,9 @@ logos/ff.io/
   ff.io-icon-bug-color-transp  (Bug, color, transparent)
   ff.io-icon-circle-color-transp  (Bug in a black circle, color)
   ff.io-icon-circle-white-transp  (Bug in a black circle, white)
-  ff.io-avatar-ring-color-onblack  (Ring: bug and wordmark on black)
+  ff.io-avatar-ring-color-onblack  (Ring: bug and wordmark on a black square)
+  ff.io-avatar-ring-color-transp-dark  (Ring: white wordmark, transparent, for dark backgrounds)
+  ff.io-avatar-ring-color-transp-light  (Ring: black wordmark, transparent, for light backgrounds)
   ff.io-avatar-square-color-onblack  (Square: bug on black)
 
 logos/ff.indust/
